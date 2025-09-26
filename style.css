@@ -2627,3 +2627,448 @@ footer {
         height: auto;
     }
 }
+
+.creation-section {
+    width: 100%;
+    padding: 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.creation-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 20px;
+    margin: 0;
+}
+
+.creation-table td {
+    vertical-align: top;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Column Specific Styles */
+.controls-column {
+    width: 25%;
+    min-width: 280px;
+}
+
+.canvas-column {
+    width: 50%;
+    text-align: center;
+    background: linear-gradient(145deg, #f8f9ff, #e8f0ff);
+}
+
+.background-upload-column {
+    width: 25%;
+    min-width: 250px;
+}
+
+/* Pattern Generation Section */
+.pattern-generation-section {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #e0e7ff;
+}
+
+.pattern-generation-section h4 {
+    color: #4c51bf;
+    font-size: 18px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.control-group {
+    margin-bottom: 15px;
+}
+
+.control-group label {
+    display: block;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.control-group select {
+    width: 100%;
+    padding: 8px 12px;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 14px;
+    background: white;
+    transition: all 0.3s ease;
+}
+
+.control-group select:focus {
+    outline: none;
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.symmetry-options {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+.symmetry-btn {
+    flex: 1;
+    padding: 8px 12px;
+    border: 2px solid #e5e7eb;
+    background: white;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 60px;
+}
+
+.symmetry-btn:hover {
+    border-color: #6366f1;
+    background: #f0f1ff;
+}
+
+.symmetry-btn.active {
+    background: #6366f1;
+    color: white;
+    border-color: #6366f1;
+}
+
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn-primary, .btn-secondary, .btn-danger {
+    padding: 12px 16px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.btn-secondary {
+    background: #f3f4f6;
+    color: #374151;
+    border: 2px solid #e5e7eb;
+}
+
+.btn-secondary:hover {
+    background: #e5e7eb;
+    transform: translateY(-1px);
+}
+
+.btn-danger {
+    background: #ef4444;
+    color: white;
+}
+
+.btn-danger:hover {
+    background: #dc2626;
+    transform: translateY(-1px);
+}
+
+/* Drawing Tools Section */
+.drawing-tools-section h4 {
+    color: #059669;
+    font-size: 18px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.color-controls {
+    margin-bottom: 20px;
+}
+
+.color-picker-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+#colorPicker {
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.current-color-display {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 3px solid white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.color-presets {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.color-preset {
+    width: 35px;
+    height: 35px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 3px solid white;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.color-preset:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.brush-controls {
+    margin-bottom: 20px;
+}
+
+.brush-controls label {
+    display: block;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.brush-size-slider {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.brush-preview {
+    text-align: center;
+    padding: 10px;
+}
+
+.brush-preview-circle {
+    width: 20px;
+    height: 20px;
+    background: #6366f1;
+    border-radius: 50%;
+    margin: 0 auto;
+    transition: all 0.3s ease;
+}
+
+.drawing-modes {
+    margin-bottom: 20px;
+}
+
+.drawing-mode-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.drawing-mode-btn {
+    padding: 12px;
+    border: 2px solid #e5e7eb;
+    background: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+}
+
+.drawing-mode-btn:hover {
+    border-color: #6366f1;
+    background: #f0f1ff;
+}
+
+.drawing-mode-btn.active {
+    background: #6366f1;
+    color: white;
+    border-color: #6366f1;
+}
+
+/* Canvas Section */
+.canvas-section h3 {
+    color: #4c51bf;
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.canvas-container {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 15px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    border: 3px solid white;
+}
+
+#kolamCanvas {
+    display: block;
+    background: white;
+    cursor: crosshair;
+}
+
+.canvas-info {
+    background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+    border-left: 4px solid #0ea5e9;
+}
+
+.canvas-info p {
+    margin: 5px 0;
+    color: #0c4a6e;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Background Upload Section */
+.background-upload-section h4 {
+    color: #7c3aed;
+    font-size: 18px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.background-upload-section p {
+    color: #6b7280;
+    font-size: 12px;
+    margin-bottom: 15px;
+    font-style: italic;
+}
+
+.background-upload-area {
+    border: 3px dashed #d1d5db;
+    border-radius: 12px;
+    padding: 30px 15px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: linear-gradient(135deg, #fafbff, #f1f5f9);
+}
+
+.background-upload-area:hover {
+    border-color: #7c3aed;
+    background: linear-gradient(135deg, #f3f0ff, #e0e7ff);
+    transform: translateY(-2px);
+}
+
+.upload-icon {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.background-upload-area p {
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 5px;
+}
+
+.background-upload-area small {
+    color: #6b7280;
+    font-size: 11px;
+}
+
+.background-controls {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 2px solid #f3f4f6;
+}
+
+.background-controls .control-group {
+    margin-bottom: 15px;
+}
+
+.background-controls input[type="range"] {
+    width: 100%;
+    margin-top: 5px;
+}
+
+.control-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .creation-table {
+        border-spacing: 10px;
+    }
+    
+    .creation-table td {
+        padding: 15px;
+    }
+    
+    .controls-column {
+        min-width: 250px;
+    }
+}
+
+@media (max-width: 768px) {
+    .creation-table,
+    .creation-table tbody,
+    .creation-table tr {
+        display: block;
+        width: 100%;
+    }
+    
+    .creation-table td {
+        display: block;
+        width: 100%;
+        margin-bottom: 15px;
+    }
+    
+    .canvas-column {
+        order: 1;
+    }
+    
+    .controls-column {
+        order: 2;
+    }
+    
+    .background-upload-column {
+        order: 3;
+    }
+}

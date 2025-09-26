@@ -769,162 +769,205 @@
                     </div>
                 </div>
             </div>
-<!-- Replace the existing Create Kolam tab content in index.html with this enhanced version -->
-<div class="tab-content" id="create">
+           <div class="tab-content" id="create">
     <div class="creation-section">
-        <div class="creation-controls">
-            <h3>Create Your Kolam</h3>
-            
-            <!-- Drawing Tools Section -->
-            <div class="drawing-tools-section">
-                <h4>🎨 Drawing Tools</h4>
-                
-                <!-- Color Controls -->
-                <div class="color-controls">
-                    <label for="colorPicker">Color:</label>
-                    <div class="color-picker-container">
-                        <input type="color" id="colorPicker" value="#ff6b6b">
-                        <div id="currentColorDisplay" class="current-color-display"></div>
+        <table class="creation-table">
+            <tr>
+                <td class="controls-column">
+                    <!-- Pattern Generation Controls -->
+                    <div class="pattern-generation-section">
+                        <h4>🎯 Pattern Generation</h4>
+                        
+                        <div class="control-group">
+                            <label>Grid Size:</label>
+                            <select id="gridSize">
+                                <option value="5">5×5</option>
+                                <option value="8" selected>8×8</option>
+                                <option value="10">10×10</option>
+                                <option value="12">12×12</option>
+                            </select>
+                        </div>
+                        
+                        <div class="control-group">
+                            <label>Pattern Type:</label>
+                            <select id="patternType">
+                                <option value="basic">Basic Lines</option>
+                                <option value="loops">Loops & Curves</option>
+                                <option value="geometric">Geometric Shapes</option>
+                                <option value="floral">Floral Motifs</option>
+                            </select>
+                        </div>
+                        
+                        <div class="control-group">
+                            <label>Symmetry:</label>
+                            <div class="symmetry-options">
+                                <button class="symmetry-btn active" data-symmetry="none">None</button>
+                                <button class="symmetry-btn" data-symmetry="2-fold">2-fold</button>
+                                <button class="symmetry-btn" data-symmetry="4-fold">4-fold</button>
+                                <button class="symmetry-btn" data-symmetry="8-fold">8-fold</button>
+                            </div>
+                        </div>
+                        
+                        <div class="action-buttons">
+                            <button class="btn-primary" id="generateBtn">✨ Generate Kolam</button>
+                            <button class="btn-secondary" id="clearCanvasBtn">🗑️ Clear Canvas</button>
+                            <button class="btn-secondary" id="saveBtn">💾 Save Design</button>
+                        </div>
                     </div>
-                    
-                    <div class="color-presets">
-                        <div class="color-preset" data-color="#ff6b6b" style="background-color: #ff6b6b;" title="Red"></div>
-                        <div class="color-preset" data-color="#4ecdc4" style="background-color: #4ecdc4;" title="Teal"></div>
-                        <div class="color-preset" data-color="#45b7d1" style="background-color: #45b7d1;" title="Blue"></div>
-                        <div class="color-preset" data-color="#96ceb4" style="background-color: #96ceb4;" title="Green"></div>
-                        <div class="color-preset" data-color="#feca57" style="background-color: #feca57;" title="Yellow"></div>
-                        <div class="color-preset" data-color="#ff9ff3" style="background-color: #ff9ff3;" title="Pink"></div>
-                        <div class="color-preset" data-color="#a29bfe" style="background-color: #a29bfe;" title="Purple"></div>
-                        <div class="color-preset" data-color="#fd79a8" style="background-color: #fd79a8;" title="Rose"></div>
-                        <div class="color-preset" data-color="#00b894" style="background-color: #00b894;" title="Emerald"></div>
-                        <div class="color-preset" data-color="#e17055" style="background-color: #e17055;" title="Orange"></div>
-                        <div class="color-preset" data-color="#636e72" style="background-color: #636e72;" title="Gray"></div>
-                        <div class="color-preset" data-color="#2d3436" style="background-color: #2d3436;" title="Black"></div>
-                    </div>
-                </div>
 
-                <!-- Brush Size Control -->
-                <div class="brush-controls">
-                    <label for="brushSize">Brush Size: <span id="brushSizeDisplay">3px</span></label>
-                    <input type="range" id="brushSize" min="1" max="50" value="3" class="brush-size-slider">
-                    <div class="brush-preview">
-                        <div id="brushPreview" class="brush-preview-circle"></div>
-                    </div>
-                </div>
+                    <!-- Drawing Tools Section -->
+                    <div class="drawing-tools-section">
+                        <h4>🎨 Drawing Tools</h4>
+                        
+                        <!-- Color Controls -->
+                        <div class="color-controls">
+                            <label for="colorPicker">Color:</label>
+                            <div class="color-picker-container">
+                                <input type="color" id="colorPicker" value="#ff6b6b">
+                                <div id="currentColorDisplay" class="current-color-display"></div>
+                            </div>
+                            
+                            <div class="color-presets">
+                                <div class="color-preset" data-color="#ff6b6b" style="background-color: #ff6b6b;" title="Red"></div>
+                                <div class="color-preset" data-color="#4ecdc4" style="background-color: #4ecdc4;" title="Teal"></div>
+                                <div class="color-preset" data-color="#45b7d1" style="background-color: #45b7d1;" title="Blue"></div>
+                                <div class="color-preset" data-color="#96ceb4" style="background-color: #96ceb4;" title="Green"></div>
+                                <div class="color-preset" data-color="#feca57" style="background-color: #feca57;" title="Yellow"></div>
+                                <div class="color-preset" data-color="#ff9ff3" style="background-color: #ff9ff3;" title="Pink"></div>
+                                <div class="color-preset" data-color="#a29bfe" style="background-color: #a29bfe;" title="Purple"></div>
+                                <div class="color-preset" data-color="#fd79a8" style="background-color: #fd79a8;" title="Rose"></div>
+                                <div class="color-preset" data-color="#00b894" style="background-color: #00b894;" title="Emerald"></div>
+                                <div class="color-preset" data-color="#e17055" style="background-color: #e17055;" title="Orange"></div>
+                                <div class="color-preset" data-color="#636e72" style="background-color: #636e72;" title="Gray"></div>
+                                <div class="color-preset" data-color="#2d3436" style="background-color: #2d3436;" title="Black"></div>
+                            </div>
+                        </div>
 
-                <!-- Drawing Mode Controls -->
-                <div class="drawing-modes">
-                    <label>Drawing Mode:</label>
-                    <div class="drawing-mode-buttons">
-                        <button class="drawing-mode-btn active" data-mode="brush" title="Brush Tool">
-                            <span class="mode-icon">🖌️</span>
-                            <span class="mode-label">Brush</span>
-                        </button>
-                        <button id="eraserBtn" class="drawing-mode-btn" data-mode="eraser" title="Eraser Tool">
-                            <span class="mode-icon">🧽</span>
-                            <span class="mode-label">Eraser</span>
-                        </button>
-                        <button id="fillBtn" class="drawing-mode-btn" data-mode="fill" title="Fill Tool">
-                            <span class="mode-icon">🪣</span>
-                            <span class="mode-label">Fill</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
+                        <!-- Brush Size Control -->
+                        <div class="brush-controls">
+                            <label for="brushSize">Brush Size: <span id="brushSizeDisplay">3px</span></label>
+                            <input type="range" id="brushSize" min="1" max="50" value="3" class="brush-size-slider">
+                            <div class="brush-preview">
+                                <div id="brushPreview" class="brush-preview-circle"></div>
+                            </div>
+                        </div>
 
-            <!-- Canvas Controls Section -->
-            <div class="canvas-controls-section">
-                <h4>⚙️ Canvas Controls</h4>
-                
-                <!-- Undo/Redo -->
-                <div class="undo-redo-controls">
-                    <button id="undoBtn" class="btn-secondary" title="Undo (Ctrl+Z)">
-                        <span>↶</span> Undo
-                    </button>
-                    <button id="redoBtn" class="btn-secondary" title="Redo (Ctrl+Y)">
-                        <span>↷</span> Redo
-                    </button>
-                </div>
-            </div>
-            
-            <!-- Background Image Upload Section -->
-            <div class="background-upload-section">
-                <h4>Background Image (Optional)</h4>
-                <div id="backgroundUploadArea" class="background-upload-area">
-                    <div class="upload-icon">📷</div>
-                    <p>Click or drag to upload background image</p>
-                    <small>Use as reference for drawing kolam patterns</small>
-                </div>
-                <input type="file" id="backgroundFileInput" accept="image/*" style="display: none;">
-                
-                <!-- Background Controls -->
-                <div id="backgroundControls" class="background-controls" style="display: none;">
-                    <div class="control-group">
-                        <label for="backgroundOpacity">Background Opacity:</label>
-                        <input type="range" id="backgroundOpacity" min="0.1" max="1" step="0.1" value="0.5">
+                        <!-- Drawing Mode Controls -->
+                        <div class="drawing-modes">
+                            <label>Drawing Mode:</label>
+                            <div class="drawing-mode-buttons">
+                                <button class="drawing-mode-btn active" data-mode="brush" title="Brush Tool">
+                                    <span class="mode-icon">🖌️</span>
+                                    <span class="mode-label">Brush</span>
+                                </button>
+                                <button id="eraserBtn" class="drawing-mode-btn" data-mode="eraser" title="Eraser Tool">
+                                    <span class="mode-icon">🧽</span>
+                                    <span class="mode-label">Eraser</span>
+                                </button>
+                                <button id="fillBtn" class="drawing-mode-btn" data-mode="fill" title="Fill Tool">
+                                    <span class="mode-icon">🪣</span>
+                                    <span class="mode-label">Fill</span>
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="control-buttons">
-                        <button id="toggleBackgroundBtn" class="btn-secondary">Hide Background</button>
-                        <button id="removeBackgroundBtn" class="btn-danger">Remove Background</button>
+                </td>
+
+                <td class="canvas-column">
+                    <div class="canvas-section">
+                        <h3>Create Your Kolam</h3>
+                        <div class="canvas-container">
+                            <canvas id="kolamCanvas" width="500" height="500"></canvas>
+                            <div class="canvas-overlay" id="therapeuticOverlay"></div>
+                        </div>
+                        <div class="canvas-info">
+                            <p>🖱️ Click and drag to draw. Use the color picker and brush size controls for customization.</p>
+                            <p>⚖️ Enable symmetry for traditional kolam patterns.</p>
+                        </div>
                     </div>
-                </div>
-            </div>
-            
-            <!-- Pattern Generation Controls -->
-            <div class="pattern-generation-section">
-                <h4>🎯 Pattern Generation</h4>
-                
-                <div class="control-group">
-                    <label>Grid Size:</label>
-                    <select id="gridSize">
-                        <option value="5">5×5</option>
-                        <option value="8" selected>8×8</option>
-                        <option value="10">10×10</option>
-                        <option value="12">12×12</option>
-                    </select>
-                </div>
-                
-                <div class="control-group">
-                    <label>Pattern Type:</label>
-                    <select id="patternType">
-                        <option value="basic">Basic Lines</option>
-                        <option value="loops">Loops & Curves</option>
-                        <option value="geometric">Geometric Shapes</option>
-                        <option value="floral">Floral Motifs</option>
-                    </select>
-                </div>
-                
-                <div class="control-group">
-                    <label>Symmetry:</label>
-                    <div class="symmetry-options">
-                        <button class="symmetry-btn active" data-symmetry="none">None</button>
-                        <button class="symmetry-btn" data-symmetry="2-fold">2-fold</button>
-                        <button class="symmetry-btn" data-symmetry="4-fold">4-fold</button>
-                        <button class="symmetry-btn" data-symmetry="8-fold">8-fold</button>
+                </td>
+
+                <td class="background-upload-column">
+                    <!-- Background Image Upload Section -->
+                    <div class="background-upload-section">
+                        <h4>📷 Background Image</h4>
+                        <p>(Optional)</p>
+                        <div id="backgroundUploadArea" class="background-upload-area">
+                            <div class="upload-icon">📷</div>
+                            <p>Click or drag to upload background image</p>
+                            <small>Use as reference for drawing kolam patterns</small>
+                        </div>
+                        <input type="file" id="backgroundFileInput" accept="image/*" style="display: none;">
+                        
+                        <!-- Background Controls -->
+                        <div id="backgroundControls" class="background-controls" style="display: none;">
+                            <div class="control-group">
+                                <label for="backgroundOpacity">Background Opacity:</label>
+                                <input type="range" id="backgroundOpacity" min="0.1" max="1" step="0.1" value="0.5">
+                            </div>
+                            <div class="control-buttons">
+                                <button id="toggleBackgroundBtn" class="btn-secondary">Hide Background</button>
+                                <button id="removeBackgroundBtn" class="btn-danger">Remove Background</button>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="action-buttons">
-                    <button class="btn-primary" id="generateBtn">✨ Generate Kolam</button>
-                    <button class="btn-secondary" id="clearCanvasBtn">🗑️ Clear Canvas</button>
-                    <button class="btn-secondary" id="saveBtn">💾 Save Design</button>
-                </div>
-            </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<!-- Pattern Gallery Tab -->
+<div class="tab-content" id="gallery">
+    <div class="gallery-section">
+        <h3>Traditional Kolam Patterns</h3>
+        <div class="filter-controls">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="basic">Basic</button>
+            <button class="filter-btn" data-filter="intermediate">Intermediate</button>
+            <button class="filter-btn" data-filter="advanced">Advanced</button>
+            <button class="filter-btn" data-filter="regional">Regional</button>
         </div>
         
-        <div class="canvas-section">
-            <div class="canvas-container">
-                <canvas id="kolamCanvas" width="500" height="500"></canvas>
-                <div class="canvas-overlay" id="therapeuticOverlay"></div>
+        <div class="gallery-grid">
+            <div class="gallery-item" data-category="basic">
+                <canvas class="pattern-canvas" width="150" height="150" data-pattern="simple-square"></canvas>
+                <h4>Simple Square</h4>
+                <p>Basic 4×4 dot pattern</p>
             </div>
-            <div class="canvas-info">
-                <p>🖱️ Click and drag to draw. Use the color picker and brush size controls for customization.</p>
-                <p>⚖️ Enable symmetry for traditional kolam patterns.</p>
+            
+            <div class="gallery-item" data-category="intermediate">
+                <canvas class="pattern-canvas" width="150" height="150" data-pattern="flower-petals"></canvas>
+                <h4>Flower Petals</h4>
+                <p>8-fold symmetry pattern</p>
+            </div>
+            
+            <div class="gallery-item" data-category="advanced">
+                <canvas class="pattern-canvas" width="150" height="150" data-pattern="geometric-maze"></canvas>
+                <h4>Geometric Maze</h4>
+                <p>Complex interlocking design</p>
+            </div>
+            
+            <div class="gallery-item" data-category="regional">
+                <canvas class="pattern-canvas" width="150" height="150" data-pattern="tamil-traditional"></canvas>
+                <h4>Tamil Traditional</h4>
+                <p>Classic South Indian style</p>
+            </div>
+            
+            <div class="gallery-item" data-category="basic">
+                <canvas class="pattern-canvas" width="150" height="150" data-pattern="dot-grid"></canvas>
+                <h4>Dot Grid</h4>
+                <p>Foundation pattern</p>
+            </div>
+            
+            <div class="gallery-item" data-category="intermediate">
+                <canvas class="pattern-canvas" width="150" height="150" data-pattern="spiral-design"></canvas>
+                <h4>Spiral Design</h4>
+                <p>Curved line pattern</p>
             </div>
         </div>
     </div>
 </div>
-
             <!-- Pattern Gallery Tab -->
             <div class="tab-content" id="gallery">
                 <div class="gallery-section">
@@ -977,6 +1020,57 @@
                 </div>
             </div>
 
+            <!-- Pattern Gallery Tab -->
+            <div class="tab-content" id="gallery">
+                <div class="gallery-section">
+                    <h3>Traditional Kolam Patterns</h3>
+                    <div class="filter-controls">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="basic">Basic</button>
+                        <button class="filter-btn" data-filter="intermediate">Intermediate</button>
+                        <button class="filter-btn" data-filter="advanced">Advanced</button>
+                        <button class="filter-btn" data-filter="regional">Regional</button>
+                    </div>
+                    
+                    <div class="gallery-grid">
+                        <div class="gallery-item" data-category="basic">
+                            <canvas class="pattern-canvas" width="150" height="150" data-pattern="simple-square"></canvas>
+                            <h4>Simple Square</h4>
+                            <p>Basic 4×4 dot pattern</p>
+                        </div>
+                        
+                        <div class="gallery-item" data-category="intermediate">
+                            <canvas class="pattern-canvas" width="150" height="150" data-pattern="flower-petals"></canvas>
+                            <h4>Flower Petals</h4>
+                            <p>8-fold symmetry pattern</p>
+                        </div>
+                        
+                        <div class="gallery-item" data-category="advanced">
+                            <canvas class="pattern-canvas" width="150" height="150" data-pattern="geometric-maze"></canvas>
+                            <h4>Geometric Maze</h4>
+                            <p>Complex interlocking design</p>
+                        </div>
+                        
+                        <div class="gallery-item" data-category="regional">
+                            <canvas class="pattern-canvas" width="150" height="150" data-pattern="tamil-traditional"></canvas>
+                            <h4>Tamil Traditional</h4>
+                            <p>Classic South Indian style</p>
+                        </div>
+                        
+                        <div class="gallery-item" data-category="basic">
+                            <canvas class="pattern-canvas" width="150" height="150" data-pattern="dot-grid"></canvas>
+                            <h4>Dot Grid</h4>
+                            <p>Foundation pattern</p>
+                        </div>
+                        
+                        <div class="gallery-item" data-category="intermediate">
+                            <canvas class="pattern-canvas" width="150" height="150" data-pattern="spiral-design"></canvas>
+                            <h4>Spiral Design</h4>
+                            <p>Curved line pattern</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <!-- Design Principles Tab -->
             <div class="tab-content" id="principles">
                 <div class="principles-section">
