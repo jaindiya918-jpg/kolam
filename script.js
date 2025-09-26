@@ -2457,3 +2457,4 @@ KolamAnalyzer.prototype.setupTherapeuticCanvas = function() {
         therapeuticCanvas.dispatchEvent(mouseEvent);
     });
 };
+
