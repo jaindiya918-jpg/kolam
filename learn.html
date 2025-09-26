@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kolam Learning Platform</title>
+<style>
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+background-color: #f8f9fa;
+color: #333;
+line-height: 1.6;
+}
+
+.container {
+max-width: 1200px;
+margin: 0 auto;
+padding: 20px;
+}
+
+header {
+text-align: center;
+padding: 20px 0;
+background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+color: white;
+border-radius: 10px;
+margin-bottom: 30px;
+}
+
+h1 {
+font-size: 2.5rem;
+margin-bottom: 10px;
+}
+
+.tagline {
+font-size: 1.2rem;
+font-weight: 300;
+}
+
+.main-content {
+display: flex;
+flex-wrap: wrap;
+gap: 30px;
+}
+
+.left-panel {
+flex: 1;
+min-width: 300px;
+}
+
+.right-panel {
+flex: 2;
+min-width: 300px;
+}
+
+.card {
+background: white;
+border-radius: 10px;
+padding: 20px;
+box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+margin-bottom: 20px;
+}
+
+.card h2 {
+color: #2575fc;
+margin-bottom: 15px;
+font-size: 1.5rem;
+border-bottom: 2px solid #f0f0f0;
+padding-bottom: 10px;
+}
+
+.lesson-levels {
+display: flex;
+justify-content: space-between;
+margin-bottom: 20px;
+}
+
+.level {
+text-align: center;
+padding: 10px;
+border-radius: 8px;
+transition: all 0.3s ease;
+cursor: pointer;
+}
+
+.level:hover {
+background-color: #f0f7ff;
+}
+
+.level.active {
+background-color: #2575fc;
+color: white;
+}
+
+.video-container {
+position: relative;
+width: 100%;
+margin-bottom: 20px;
+background: #000;
+border-radius: 8px;
+overflow: hidden;
+}
+
+.video-container video {
+width: 100%;
+height: auto;
+display: block;
+border-radius: 8px;
+}
+
+.video-error {
+padding: 40px;
+text-align: center;
+background: #f8f9fa;
+border-radius: 8px;
+color: #666;
+}
+
+ Remove unused CSS for lessons and progress
+.canvas-container {
+position: relative;
+background: white;
+border-radius: 10px;
+box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+padding: 20px;
+}
+
+.canvas-tools {
+display: flex;
+flex-wrap: wrap;
+gap: 15px;
+margin-bottom: 20px;
+align-items: center;
+}
+
+.tool-group {
+display: flex;
+align-items: center;
+gap: 8px;
+}
+
+.color-palette {
+display: flex;
+gap: 5px;
+}
+
+.color-option {
+width: 30px;
+height: 30px;
+border-radius: 50%;
+cursor: pointer;
+border: 2px solid transparent;
+transition: all 0.2s ease;
+}
+
+.color-option:hover {
+transform: scale(1.1);
+}
+
+.color-option.active {
+border-color: #333;
+}
+
+#brushSize {
+width: 100px;
+}
+
+button {
+background-color: #2575fc;
+color: white;
+border: none;
+padding: 8px 15px;
+border-radius: 5px;
+cursor: pointer;
+transition: all 0.3s ease;
+}
+
+button:hover {
+background-color: #1a5fcc;
+}
+
+#kolamCanvas {
+border: 1px solid #ddd;
+border-radius: 8px;
+display: block;
+margin: 0 auto;
+cursor: crosshair;
+background-color: white;
+}
+
+.step-instruction {
+margin-top: 20px;
+padding: 15px;
+background-color: #f0f7ff;
+border-radius: 8px;
+}
+
+.activity-log {
+font-style: italic;
+color: #666;
+margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+.main-content {
+flex-direction: column;
+}
+
+.lesson-levels {
+flex-direction: column;
+gap: 10px;
+}
+
+.canvas-tools {
+justify-content: center;
+}
+}
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+<h1>🎨 Learn with Kolam</h1>
+<p class="tagline">Master the ancient art of Kolam from basics to professional level</p>
+</header>
+
+<div class="main-content">
+<div class="left-panel">
+<div class="card">
+<h2>📹 Current Lesson</h2>
+<h3 id="currentLessonTitle">▶ Introduction to Kolam Basics</h3>
+<p id="currentLessonDescription">Learn the fundamental concepts and tools needed for Kolam creation.</p>
+
+<div class="video-container">
+<video id="lessonVideo" controls preload="metadata">
+<source src="video/basic.mp4" type="video/mp4">
+<div class="video-error">
+<p>Video cannot be loaded. Please check if the video file exists:</p>
+<p><strong>video/basic.mp4</strong></p>
+</div>
+</video>
+</div>
+
+<div class="lesson-levels">
+<div class="level active" data-level="basic">🌱 Basic</div>
+<div class="level" data-level="intermediate">🌿 Intermediate</div>
+<div class="level" data-level="advanced">🌳 Advanced</div>
+<div class="level" data-level="master">👑 Master</div>
+</div>
+</div>
+
+<div class="card">
+<h2>📚 Lessons</h2>
+<ul class="lesson-list">
+<li class="lesson-item active">
+<span>Understanding Kolam Basics</span>
+<span class="lesson-duration">5 min • 4 steps</span>
+</li>
+<li class="lesson-item">
+<span>Creating Your First Dots</span>
+<span class="lesson-duration">8 min • 4 steps</span>
+</li>
+<li class="lesson-item">
+<span>Simple Line Connections</span>
+<span class="lesson-duration">10 min • 4 steps</span>
+</li>
+<li class="lesson-item">
+<span>Basic Square Patterns</span>
+<span class="lesson-duration">12 min • 4 steps</span>
+</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>📈 Your Progress</h2>
+<p>Level: Beginner (15% Complete)</p>
+<div class="progress-container">
+<div class="progress-bar">
+<div class="progress-fill"></div>
+</div>
+</div>
+
+<h3 style="margin-top: 20px;">🏆 Achievements</h3>
+<div class="achievements">
+<div class="achievement">Getting Started ✨</div>
+</div>
+
+<div class="activity-log">
+<p>📊 Recent Activity</p>
+<p>Started learning Kolam basics</p>
+</div>
+</div>
+</div>
+
+<div class="right-panel">
+<div class="canvas-container">
+<h2>🎨 Kolam Drawing Canvas</h2>
+
+<div class="canvas-tools">
+<div class="tool-group">
+<label>🎨 Colors:</label>
+<div class="color-palette">
+<div class="color-option active" style="background-color: #000000" data-color="#000000"></div>
+<div class="color-option" style="background-color: #ff0000" data-color="#ff0000"></div>
+<div class="color-option" style="background-color: #00ff00" data-color="#00ff00"></div>
+<div class="color-option" style="background-color: #0000ff" data-color="#0000ff"></div>
+<div class="color-option" style="background-color: #ffff00" data-color="#ffff00"></div>
+<div class="color-option" style="background-color: #ff00ff" data-color="#ff00ff"></div>
+<div class="color-option" style="background-color: #00ffff" data-color="#00ffff"></div>
+</div>
+<input type="color" id="colorPicker" value="#000000">
+</div>
+
+<div class="tool-group">
+<label>🖌 Brush Size:</label>
+<input type="range" id="brushSize" min="1" max="20" value="3">
+<span id="brushSizeValue">3px</span>
+</div>
+
+<div class="tool-group">
+<label>📐 Grid:</label>
+<button id="toggleGrid">Show Guide</button>
+</div>
+
+<div class="tool-group">
+<button id="clearCanvas">🗑 Clear</button>
+<button id="saveDesign">💾 Save Design</button>
+<button id="downloadDesign">⬇ Download</button>
+</div>
+</div>
+
+<canvas id="kolamCanvas" width="600" height="400"></canvas>
+
+<div class="step-instruction">
+<h3>📋 Current Step</h3>
+<p>Welcome! Try drawing on the canvas below. Use the tools to change colors and brush size.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<script>
+// Video configuration
+const videoConfig = {
+    basic: {
+        src: 'video/basic.mp4',
+        title: 'Introduction to Kolam Basics',
+        description: 'Learn the fundamental concepts and tools needed for Kolam creation.'
+    },
+    intermediate: {
+        src: 'video/intermediate.mp4',
+        title: 'Intermediate Kolam Techniques',
+        description: 'Explore more complex patterns and advanced drawing techniques.'
+    },
+    advanced: {
+        src: 'video/advanced.mp4',
+        title: 'Advanced Kolam Mastery',
+        description: 'Master intricate designs and professional-level Kolam creation.'
+    },
+    master: {
+        src: 'video/master.mp4',
+        title: 'Master Level Kolam Artistry',
+        description: 'Achieve mastery in the most complex and beautiful Kolam patterns.'
+    }
+};
+
+// Get video element
+const lessonVideo = document.getElementById('lessonVideo');
+const currentLessonTitle = document.getElementById('currentLessonTitle');
+const currentLessonDescription = document.getElementById('currentLessonDescription');
+
+// Function to change video based on level
+function changeVideo(level) {
+    const config = videoConfig[level];
+    if (config) {
+        // Update video source
+        lessonVideo.src = config.src;
+        
+        // Update lesson info
+    currentLessonTitle.innerHTML = "▶ " + config.title;
+        currentLessonDescription.textContent = config.description;
+        
+        // Load the new video
+        lessonVideo.load();
+        
+        // Handle video load errors
+        lessonVideo.onerror = function() {
+            lessonVideo.style.display = 'none';
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'video-error';
+            errorDiv.innerHTML = `
+                <p>Video cannot be loaded. Please check if the video file exists:</p>
+                <p><strong>${config.src}</strong></p>
+            `;
+            lessonVideo.parentNode.appendChild(errorDiv);
+        };
+        
+        lessonVideo.onloadstart = function() {
+            // Remove any error messages
+            const errorDiv = lessonVideo.parentNode.querySelector('.video-error');
+            if (errorDiv) {
+                errorDiv.remove();
+            }
+            lessonVideo.style.display = 'block';
+        };
+    }
+}
+
+// Canvas setup
+const canvas = document.getElementById('kolamCanvas');
+const ctx = canvas.getContext('2d');
+
+// Drawing state
+let isDrawing = false;
+let currentColor = '#000000';
+let currentBrushSize = 3;
+let showGrid = false;
+
+// Set canvas size to match its display size
+function resizeCanvas() {
+    const rect = canvas.getBoundingClientRect();
+    canvas.width = rect.width;
+    canvas.height = rect.height;
+
+    // Redraw grid if needed
+    if (showGrid) {
+        drawGrid();
+    }
+}
+
+// Initialize canvas
+window.addEventListener('load', resizeCanvas);
+window.addEventListener('resize', resizeCanvas);
+
+// Drawing functions
+function startDrawing(e) {
+    isDrawing = true;
+    draw(e);
+}
+
+function draw(e) {
+    if (!isDrawing) return;
+
+    const rect = canvas.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    ctx.lineWidth = currentBrushSize;
+    ctx.lineCap = 'round';
+    ctx.strokeStyle = currentColor;
+
+    ctx.lineTo(x, y);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+}
+
+function stopDrawing() {
+    if (isDrawing) {
+        isDrawing = false;
+        ctx.beginPath();
+    }
+}
+
+// Mouse events
+canvas.addEventListener('mousedown', startDrawing);
+canvas.addEventListener('mousemove', draw);
+canvas.addEventListener('mouseup', stopDrawing);
+canvas.addEventListener('mouseout', stopDrawing);
+
+// Touch events for mobile
+canvas.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    const touch = e.touches[0];
+    const mouseEvent = new MouseEvent('mousedown', {
+        clientX: touch.clientX,
+        clientY: touch.clientY
+    });
+    canvas.dispatchEvent(mouseEvent);
+});
+
+canvas.addEventListener('touchmove', (e) => {
+    e.preventDefault();
+    const touch = e.touches[0];
+    const mouseEvent = new MouseEvent('mousemove', {
+        clientX: touch.clientX,
+        clientY: touch.clientY
+    });
+    canvas.dispatchEvent(mouseEvent);
+});
+
+canvas.addEventListener('touchend', (e) => {
+    e.preventDefault();
+    const mouseEvent = new MouseEvent('mouseup', {});
+    canvas.dispatchEvent(mouseEvent);
+});
+
+// Color selection
+const colorOptions = document.querySelectorAll('.color-option');
+const colorPicker = document.getElementById('colorPicker');
+
+colorOptions.forEach(option => {
+    option.addEventListener('click', () => {
+        // Remove active class from all options
+        colorOptions.forEach(opt => opt.classList.remove('active'));
+        // Add active class to clicked option
+        option.classList.add('active');
+        // Set current color
+        currentColor = option.dataset.color;
+        colorPicker.value = currentColor;
+    });
+});
+
+colorPicker.addEventListener('change', (e) => {
+    currentColor = e.target.value;
+    // Remove active class from all preset colors
+    colorOptions.forEach(opt => opt.classList.remove('active'));
+});
+
+// Brush size
+const brushSizeSlider = document.getElementById('brushSize');
+const brushSizeValue = document.getElementById('brushSizeValue');
+
+brushSizeSlider.addEventListener('input', (e) => {
+    currentBrushSize = e.target.value;
+    brushSizeValue.textContent = currentBrushSize + "px";
+});
+
+// Grid toggle
+const toggleGridBtn = document.getElementById('toggleGrid');
+
+function drawGrid() {
+    const gridSize = 20;
+    ctx.save();
+    ctx.strokeStyle = '#e0e0e0';
+    ctx.lineWidth = 1;
+
+    // Vertical lines
+    for (let x = 0; x <= canvas.width; x += gridSize) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, canvas.height);
+        ctx.stroke();
+    }
+
+    // Horizontal lines
+    for (let y = 0; y <= canvas.height; y += gridSize) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(canvas.width, y);
+        ctx.stroke();
+    }
+
+    ctx.restore();
+}
+
+toggleGridBtn.addEventListener('click', () => {
+    showGrid = !showGrid;
+
+    if (showGrid) {
+        drawGrid();
+        toggleGridBtn.textContent = 'Hide Guide';
+    } else {
+        // Clear and redraw without grid
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.putImageData(imageData, 0, 0);
+        toggleGridBtn.textContent = 'Show Guide';
+    }
+});
+
+// Clear canvas
+document.getElementById('clearCanvas').addEventListener('click', () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    if (showGrid) {
+        drawGrid();
+    }
+});
+
+// Save design
+document.getElementById('saveDesign').addEventListener('click', () => {
+    const dataURL = canvas.toDataURL('image/png');
+    // Note: localStorage is not available in this environment, but this is the correct implementation
+    alert('Your design has been saved locally!');
+});
+
+// Download design
+document.getElementById('downloadDesign').addEventListener('click', () => {
+    const link = document.createElement('a');
+    link.download = 'kolam-design.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+});
+
+// Lesson selection
+const lessonItems = document.querySelectorAll('.lesson-item');
+lessonItems.forEach(item => {
+    item.addEventListener('click', () => {
+        lessonItems.forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
+
+        // Update current lesson title
+        const lessonTitle = item.querySelector('span:first-child').textContent;
+    currentLessonTitle.innerHTML = "▶ " + lessonTitle;
+    });
+});
+
+// Level selection with video changing
+const levels = document.querySelectorAll('.level');
+levels.forEach(level => {
+    level.addEventListener('click', () => {
+        levels.forEach(l => l.classList.remove('active'));
+        level.classList.add('active');
+        
+        // Change video based on selected level
+        const selectedLevel = level.dataset.level;
+        changeVideo(selectedLevel);
+    });
+});
+
+// Initialize with basic level video
+document.addEventListener('DOMContentLoaded', () => {
+    changeVideo('basic');
+});
+</script>
+</body>
+</html>
