@@ -8,7 +8,1781 @@
     <style>
         /* Kolam AI Generator Chatbox Styles */
         .kolam-chatbox {
+            position: fixed;<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kolam Design Analyzer</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Kolam AI Generator Chatbox Styles */
+        .kolam-chatbox {
             position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 400px;
+            height: 600px;
+            background: linear-gradient(145deg, #ff6b6b, #ee5a24, #ffa726, #ff7675);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .kolam-chatbox.minimized {
+            height: 60px;
+            width: 200px;
+        }
+
+        .chatbox-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .kolam-icon {
+            width: 30px;
+            height: 30px;
+            background: radial-gradient(circle, #ffd700, #ff6b6b);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .header-text h3 {
+            font-family: 'Arial', sans-serif;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .header-text p {
+            font-size: 12px;
+            opacity: 0.9;
+            margin-top: 2px;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .chatbox-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: white;
+        }
+
+        .minimized .chatbox-body {
+            display: none;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .message {
+            margin-bottom: 15px;
+            animation: fadeInUp 0.3s ease;
+        }
+
+        .message.user {
+            text-align: right;
+        }
+
+        .message.bot {
+            text-align: left;
+        }
+
+        .message-content {
+            display: inline-block;
+            max-width: 80%;
+            padding: 12px 16px;
+            border-radius: 20px;
+            font-family: 'Arial', sans-serif;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .message.user .message-content {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .message.bot .message-content {
+            background: white;
+            color: #333;
+            border: 2px solid #e0e0e0;
+        }
+
+        .generated-image {
+            margin-top: 15px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            border: 3px solid #667eea;
+            background: linear-gradient(145deg, #667eea, #764ba2);
+            padding: 5px;
+            position: relative;
+            animation: imageAppear 0.6s ease;
+        }
+
+        .generated-image::before {
+            content: "✨ Generated Kolam Design ✨";
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 11px;
+            font-weight: bold;
+            z-index: 2;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .generated-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .generated-image:hover img {
+            transform: scale(1.02);
+        }
+
+        .image-actions {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 12px;
+            padding: 0 5px;
+        }
+
+        .download-btn {
+            flex: 1;
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            border: none;
+            padding: 12px 16px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(40, 167, 69, 0.4);
+        }
+
+        .share-btn {
+            flex: 1;
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            border: none;
+            padding: 12px 16px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .share-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 123, 255, 0.4);
+        }
+
+        @keyframes imageAppear {
+            from {
+                opacity: 0;
+                transform: scale(0.8) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .prompt-suggestions {
+            padding: 15px;
+            background: #f8f9fa;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .suggestions-title {
+            font-size: 12px;
+            font-weight: bold;
+            color: #666;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .suggestion-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .suggestion-chip {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .suggestion-chip:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .input-section {
+            padding: 15px;
+            background: white;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .input-container {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .message-input {
+            flex: 1;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            padding: 12px 16px;
+            outline: none;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .message-input:focus {
+            border-color: #667eea;
+        }
+
+        .send-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+
+        .send-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .send-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .typing-indicator {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 12px 16px;
+            background: white;
+            border-radius: 20px;
+            border: 2px solid #e0e0e0;
+            display: none;
+        }
+
+        .typing-indicator.show {
+            display: flex;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #667eea;
+            animation: typingPulse 1.4s infinite;
+        }
+
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typingPulse {
+            0%, 60%, 100% {
+                transform: scale(0.8);
+                opacity: 0.5;
+            }
+            30% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .welcome-message {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+
+        .welcome-message h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .welcome-message p {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .kolam-chatbox {
+                width: 350px;
+                height: 500px;
+                bottom: 10px;
+                right: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .kolam-chatbox {
+                width: calc(100vw - 20px);
+                height: calc(100vh - 40px);
+                bottom: 10px;
+                right: 10px;
+                left: 10px;
+                border-radius: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1>🕉️ Kolam Design Analyzer</h1>
+                <p>Discover the mathematical principles behind traditional Indian Kolam art</p>
+            </div>
+        </header>
+
+        <nav class="tab-navigation">
+            <button class="tab-btn active" data-tab="upload">Upload & Analyze</button>
+            <button class="tab-btn" data-tab="create">Create Kolam</button>
+            <button class="tab-btn" onclick="window.open('learn.html', '_blank')">Learn Kolam</button>
+            <button class="tab-btn" data-tab="gallery">Pattern Gallery</button>
+            <button class="tab-btn" data-tab="principles">Design Principles</button>
+        </nav>
+
+        <main>
+            <!-- Upload & Analyze Tab -->
+            <div class="tab-content active" id="upload">
+                <div class="upload-section">
+                    <div class="upload-area" id="uploadArea">
+                        <div class="upload-icon">📁</div>
+                        <h3>Upload Kolam Image</h3>
+                        <p>Drop your kolam image here or click to browse</p>
+                        <input type="file" id="fileInput" accept="image/*" hidden>
+                        <button class="btn-primary" onclick="document.getElementById('fileInput').click()">
+                            Choose File
+                        </button>
+                    </div>
+                    
+                    <div class="preview-section" id="previewSection" style="display: none;">
+                        <div class="image-preview">
+                            <img id="previewImage" alt="Uploaded kolam">
+                            <div class="analysis-overlay" id="analysisOverlay"></div>
+                        </div>
+                        
+                        <div class="analysis-controls">
+                            <button class="btn-secondary" id="analyzeBtn">🔍 Analyze Pattern</button>
+                            <button class="btn-secondary" id="detectDotsBtn">• Detect Dots</button>
+                            <button class="btn-secondary" id="findSymmetryBtn">⚖️ Find Symmetry</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="results-section" id="resultsSection" style="display: none;">
+                    <h3>Analysis Results</h3>
+                    <div class="results-grid">
+                        <div class="result-card">
+                            <h4>Detected Patterns</h4>
+                            <div id="patternsResult">
+                                <div class="pattern-item">
+                                    <span class="pattern-type">Grid Pattern</span>
+                                    <span class="pattern-confidence">92%</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="result-card">
+                            <h4>Symmetry Analysis</h4>
+                            <div id="symmetryResult">
+                                <div class="symmetry-item">
+                                    <span>Rotational: 4-fold</span>
+                                    <span>Reflectional: 2 axes</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="result-card">
+                            <h4>Mathematical Properties</h4>
+                            <div id="mathResult">
+                                <div class="math-property">
+                                    <span>Dot Grid: 8×8</span>
+                                    <span>Complexity: Medium</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Therapeutic Kolam Tab -->
+            <div class="tab-content" id="therapeutic">
+                <div class="therapeutic-header">
+                    <div class="therapeutic-intro">
+                        <h3>🧘‍♀️ Therapeutic Kolam Design Generator</h3>
+                        <div class="accessibility-controls">
+                            <button class="btn-accessibility" id="readAloudBtn" aria-label="Read content aloud">
+                                🔊 Read Aloud
+                            </button>
+                            <button class="btn-accessibility" id="pauseReadingBtn" aria-label="Pause reading" style="display: none;">
+                                ⏸️ Pause
+                            </button>
+                            <button class="btn-accessibility" id="increaseFontBtn" aria-label="Increase font size">
+                                🔍+ Font Size
+                            </button>
+                            <button class="btn-accessibility" id="decreaseFontBtn" aria-label="Decrease font size">
+                                🔍- Font Size
+                            </button>
+                            <button class="btn-accessibility" id="highContrastBtn" aria-label="Toggle high contrast">
+                                ⚫⚪ High Contrast
+                            </button>
+                        </div>
+                        
+                        <div class="therapeutic-description" id="therapeuticDescription">
+                            <p><strong>Welcome to Therapeutic Kolam Design</strong> - a mindful practice that combines ancient wisdom with modern wellness techniques.</p>
+                            
+                            <p>Kolam creation has been recognized for centuries as a meditative practice that promotes mental clarity, reduces stress, and enhances focus. The repetitive, rhythmic nature of drawing geometric patterns activates the same neural pathways associated with meditation and mindfulness.</p>
+                            
+                            <h4>🌟 Therapeutic Benefits:</h4>
+                            <ul>
+                                <li><strong>Stress Reduction:</strong> The focused attention required for kolam creation naturally calms the mind and reduces cortisol levels.</li>
+                                <li><strong>Improved Focus:</strong> Drawing intricate patterns enhances concentration and attention span.</li>
+                                <li><strong>Mindfulness Practice:</strong> The present-moment awareness required mirrors traditional meditation techniques.</li>
+                                <li><strong>Motor Skills Enhancement:</strong> Fine motor control and hand-eye coordination are improved through practice.</li>
+                                <li><strong>Cognitive Stimulation:</strong> Mathematical pattern recognition stimulates both creative and analytical thinking.</li>
+                                <li><strong>Emotional Regulation:</strong> The rhythmic, predictable nature of pattern creation provides emotional stability.</li>
+                            </ul>
+                            
+                            <h4>🎯 How It Works:</h4>
+                            <p>Our therapeutic kolam generator creates personalized patterns based on your current emotional state and therapeutic goals. Each design is carefully crafted to provide the optimal balance of challenge and achievability, promoting a state of "flow" - the psychological state where you become fully immersed in the activity.</p>
+                            
+                            <p>Choose your mood, set your intention, and let the ancient art of kolam guide you toward inner peace and mental clarity.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="therapeutic-controls">
+                    <div class="mood-selection">
+                        <h4>🌈 Current Mood Assessment</h4>
+                        <div class="mood-grid">
+                            <button class="mood-btn" data-mood="stressed" aria-label="Feeling stressed or anxious">
+                                😰 Stressed
+                            </button>
+                            <button class="mood-btn" data-mood="sad" aria-label="Feeling sad or down">
+                                😢 Sad
+                            </button>
+                            <button class="mood-btn" data-mood="anxious" aria-label="Feeling anxious or worried">
+                                😟 Anxious
+                            </button>
+                            <button class="mood-btn" data-mood="restless" aria-label="Feeling restless or agitated">
+                                😤 Restless
+                            </button>
+                            <button class="mood-btn" data-mood="tired" aria-label="Feeling tired or fatigued">
+                                😴 Tired
+                            </button>
+                            <button class="mood-btn" data-mood="neutral" aria-label="Feeling neutral or balanced">
+                                😐 Neutral
+                            </button>
+                            <button class="mood-btn" data-mood="happy" aria-label="Feeling happy or content">
+                                😊 Happy
+                            </button>
+                            <button class="mood-btn" data-mood="energetic" aria-label="Feeling energetic or excited">
+                                🤩 Energetic
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="therapy-goals">
+                        <h4>🎯 Therapeutic Goals</h4>
+                        <div class="goals-grid">
+                            <label class="goal-option">
+                                <input type="checkbox" value="reduce-stress" aria-describedby="stress-desc">
+                                <span class="goal-label">Reduce Stress</span>
+                                <span class="goal-description" id="stress-desc">Calm breathing patterns, gentle curves</span>
+                            </label>
+                            <label class="goal-option">
+                                <input type="checkbox" value="improve-focus" aria-describedby="focus-desc">
+                                <span class="goal-label">Improve Focus</span>
+                                <span class="goal-description" id="focus-desc">Detailed patterns requiring attention</span>
+                            </label>
+                            <label class="goal-option">
+                                <input type="checkbox" value="boost-creativity" aria-describedby="creativity-desc">
+                                <span class="goal-label">Boost Creativity</span>
+                                <span class="goal-description" id="creativity-desc">Free-form, expressive designs</span>
+                            </label>
+                            <label class="goal-option">
+                                <input type="checkbox" value="build-confidence" aria-describedby="confidence-desc">
+                                <span class="goal-label">Build Confidence</span>
+                                <span class="goal-description" id="confidence-desc">Achievable, rewarding patterns</span>
+                            </label>
+                            <label class="goal-option">
+                                <input type="checkbox" value="mindfulness" aria-describedby="mindfulness-desc">
+                                <span class="goal-label">Practice Mindfulness</span>
+                                <span class="goal-description" id="mindfulness-desc">Meditative, repetitive motions</span>
+                            </label>
+                            <label class="goal-option">
+                                <input type="checkbox" value="motor-skills" aria-describedby="motor-desc">
+                                <span class="goal-label">Motor Skills</span>
+                                <span class="goal-description" id="motor-desc">Precise movements, coordination</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="session-settings">
+                        <h4>⏱️ Session Settings</h4>
+                        <div class="setting-row">
+                            <label for="sessionDuration">Duration:</label>
+                            <select id="sessionDuration" aria-describedby="duration-help">
+                                <option value="5">5 minutes (Quick calm)</option>
+                                <option value="10" selected>10 minutes (Standard)</option>
+                                <option value="15">15 minutes (Deep focus)</option>
+                                <option value="20">20 minutes (Extended practice)</option>
+                                <option value="custom">Custom</option>
+                            </select>
+                            <span id="duration-help" class="help-text">Choose session length based on available time</span>
+                        </div>
+                        
+                        <div class="setting-row">
+                            <label for="difficultyLevel">Difficulty:</label>
+                            <select id="difficultyLevel" aria-describedby="difficulty-help">
+                                <option value="beginner">Beginner (Simple patterns)</option>
+                                <option value="intermediate" selected>Intermediate (Moderate complexity)</option>
+                                <option value="advanced">Advanced (Intricate designs)</option>
+                                <option value="adaptive">Adaptive (AI adjusts based on progress)</option>
+                            </select>
+                            <span id="difficulty-help" class="help-text">Pattern complexity level</span>
+                        </div>
+                        
+                        <div class="setting-row">
+                            <label for="guidanceLevel">Guidance:</label>
+                            <select id="guidanceLevel" aria-describedby="guidance-help">
+                                <option value="full">Full Guidance (Step-by-step)</option>
+                                <option value="moderate" selected>Moderate (Hints available)</option>
+                                <option value="minimal">Minimal (Independent creation)</option>
+                                <option value="audio">Audio Guidance (Voice instructions)</option>
+                            </select>
+                            <span id="guidance-help" class="help-text">Level of assistance provided</span>
+                        </div>
+                    </div>
+
+                    <div class="generate-controls">
+                        <button class="btn-therapeutic" id="generateTherapeuticBtn" aria-describedby="generate-help">
+                            ✨ Generate My Therapeutic Kolam
+                        </button>
+                        <span id="generate-help" class="help-text">Creates a personalized pattern based on your selections</span>
+                        
+                        <button class="btn-secondary" id="startGuidedSessionBtn" style="display: none;" aria-describedby="session-help">
+                            🧘‍♀️ Start Guided Session
+                        </button>
+                        <span id="session-help" class="help-text" style="display: none;">Begin therapeutic drawing session</span>
+                    </div>
+                </div>
+
+                <div class="therapeutic-workspace" id="therapeuticWorkspace" style="display: none;">
+                    <div class="workspace-header">
+                        <div class="session-info">
+                            <h4 id="sessionTitle">Therapeutic Kolam Session</h4>
+                            <div class="session-stats">
+                                <span class="stat-item">
+                                    <strong>Time:</strong> <span id="sessionTimer">10:00</span>
+                                </span>
+                                <span class="stat-item">
+                                    <strong>Progress:</strong> <span id="sessionProgress">0%</span>
+                                </span>
+                                <span class="stat-item">
+                                    <strong>Mood:</strong> <span id="currentMood">Neutral</span>
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div class="session-controls">
+                            <button class="btn-session" id="pauseSessionBtn" aria-label="Pause session">⏸️</button>
+                            <button class="btn-session" id="playSessionBtn" aria-label="Resume session" style="display: none;">▶️</button>
+                            <button class="btn-session" id="endSessionBtn" aria-label="End session">⏹️</button>
+                            <button class="btn-session" id="guidanceToggleBtn" aria-label="Toggle guidance">💡</button>
+                        </div>
+                    </div>
+
+                    <div class="workspace-content">
+                        <div class="guidance-panel" id="guidancePanel">
+                            <h5>🎯 Current Step</h5>
+                            <div id="currentInstruction" class="instruction-text" aria-live="polite">
+                                Welcome! Let's begin by taking three deep breaths and centering yourself.
+                            </div>
+                            <div class="guidance-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="guidanceProgress" style="width: 0%"></div>
+                                </div>
+                                <span class="progress-text">Step <span id="currentStep">1</span> of <span id="totalSteps">8</span></span>
+                            </div>
+                        </div>
+
+                        <div class="therapeutic-canvas-section">
+                            <canvas id="therapeuticCanvas" width="500" height="500" aria-label="Therapeutic kolam drawing area"></canvas>
+                            <div class="canvas-overlay" id="therapeuticOverlay"></div>
+                        </div>
+
+                        <div class="mindfulness-panel">
+                            <h5>🧘‍♀️ Mindfulness Reminders</h5>
+                            <div id="mindfulnessText" class="mindfulness-text" aria-live="polite">
+                                Focus on your breathing as you draw. Notice the sensation of creating each line.
+                            </div>
+                            <div class="breathing-guide" id="breathingGuide">
+                                <div class="breath-circle" id="breathCircle"></div>
+                                <span class="breath-text" id="breathText">Breathe naturally</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="session-complete" id="sessionComplete" style="display: none;">
+                    <div class="completion-celebration">
+                        <h3>🌟 Session Complete!</h3>
+                        <p>Congratulations on completing your therapeutic kolam session.</p>
+                        
+                        <div class="session-summary">
+                            <h4>📊 Session Summary</h4>
+                            <div class="summary-stats">
+                                <div class="stat-card">
+                                    <span class="stat-number" id="completionTime">10:00</span>
+                                    <span class="stat-label">Time Spent</span>
+                                </div>
+                                <div class="stat-card">
+                                    <span class="stat-number" id="patternsCompleted">3</span>
+                                    <span class="stat-label">Patterns Completed</span>
+                                </div>
+                                <div class="stat-card">
+                                    <span class="stat-number" id="focusScore">85%</span>
+                                    <span class="stat-label">Focus Score</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mood-reflection">
+                            <h4>🌈 How do you feel now?</h4>
+                            <div class="post-mood-grid">
+                                <button class="post-mood-btn" data-post-mood="much-better" aria-label="Feeling much better">
+                                    🤗 Much Better
+                                </button>
+                                <button class="post-mood-btn" data-post-mood="better" aria-label="Feeling better">
+                                    😊 Better
+                                </button>
+                                <button class="post-mood-btn" data-post-mood="same" aria-label="Feeling about the same">
+                                    😐 About the Same
+                                </button>
+                                <button class="post-mood-btn" data-post-mood="need-more" aria-label="Need more time">
+                                    🤔 Need More Time
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="completion-actions">
+                            <button class="btn-primary" id="saveTherapeuticBtn">💾 Save My Kolam</button>
+                            <button class="btn-secondary" id="shareProgressBtn">📱 Share Progress</button>
+                            <button class="btn-secondary" id="startNewSessionBtn">🔄 New Session</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           <div class="tab-content" id="create">
+    <div class="creation-section">
+        <table class="creation-table">
+            <tr>
+                <td class="controls-column">
+                    <!-- Pattern Generation Controls -->
+                    <div class="pattern-generation-section">
+                        <h4>🎯 Pattern Generation</h4>
+                        
+                        <div class="control-group">
+                            <label>Grid Size:</label>
+                            <select id="gridSize">
+                                <option value="5">5×5</option>
+                                <option value="8" selected>8×8</option>
+                                <option value="10">10×10</option>
+                                <option value="12">12×12</option>
+                            </select>
+                        </div>
+                        
+                        <div class="control-group">
+                            <label>Pattern Type:</label>
+                            <select id="patternType">
+                                <option value="basic">Basic Lines</option>
+                                <option value="loops">Loops & Curves</option>
+                                <option value="geometric">Geometric Shapes</option>
+                                <option value="floral">Floral Motifs</option>
+                            </select>
+                        </div>
+                        
+                        <div class="control-group">
+                            <label>Symmetry:</label>
+                            <div class="symmetry-options">
+                                <button class="symmetry-btn active" data-symmetry="none">None</button>
+                                <button class="symmetry-btn" data-symmetry="2-fold">2-fold</button>
+                                <button class="symmetry-btn" data-symmetry="4-fold">4-fold</button>
+                                <button class="symmetry-btn" data-symmetry="8-fold">8-fold</button>
+                            </div>
+                        </div>
+                        
+                        <div class="action-buttons">
+                            <button class="btn-primary" id="generateBtn">✨ Generate Kolam</button>
+                            <button class="btn-secondary" id="clearCanvasBtn">🗑️ Clear Canvas</button>
+                            <button class="btn-secondary" id="saveBtn">💾 Save Design</button>
+                        </div>
+                    </div>
+
+                    <!-- Drawing Tools Section -->
+                    <div class="drawing-tools-section">
+                        <h4>🎨 Drawing Tools</h4>
+                        
+                        <!-- Color Controls -->
+                        <div class="color-controls">
+                            <label for="colorPicker">Color:</label>
+                            <div class="color-picker-container">
+                                <input type="color" id="colorPicker" value="#ff6b6b">
+                                <div id="currentColorDisplay" class="current-color-display"></div>
+                            </div>
+                            
+                            <div class="color-presets">
+                                <div class="color-preset" data-color="#ff6b6b" style="background-color: #ff6b6b;" title="Red"></div>
+                                <div class="color-preset" data-color="#4ecdc4" style="background-color: #4ecdc4;" title="Teal"></div>
+                                <div class="color-preset" data-color="#45b7d1" style="background-color: #45b7d1;" title="Blue"></div>
+                                <div class="color-preset" data-color="#96ceb4" style="background-color: #96ceb4;" title="Green"></div>
+                                <div class="color-preset" data-color="#feca57" style="background-color: #feca57;" title="Yellow"></div>
+                                <div class="color-preset" data-color="#ff9ff3" style="background-color: #ff9ff3;" title="Pink"></div>
+                                <div class="color-preset" data-color="#a29bfe" style="background-color: #a29bfe;" title="Purple"></div>
+                                <div class="color-preset" data-color="#fd79a8" style="background-color: #fd79a8;" title="Rose"></div>
+                                <div class="color-preset" data-color="#00b894" style="background-color: #00b894;" title="Emerald"></div>
+                                <div class="color-preset" data-color="#e17055" style="background-color: #e17055;" title="Orange"></div>
+                                <div class="color-preset" data-color="#636e72" style="background-color: #636e72;" title="Gray"></div>
+                                <div class="color-preset" data-color="#2d3436" style="background-color: #2d3436;" title="Black"></div>
+                            </div>
+                        </div>
+
+                        <!-- Brush Size Control -->
+                        <div class="brush-controls">
+                            <label for="brushSize">Brush Size: <span id="brushSizeDisplay">3px</span></label>
+                            <input type="range" id="brushSize" min="1" max="50" value="3" class="brush-size-slider">
+                            <div class="brush-preview">
+                                <div id="brushPreview" class="brush-preview-circle"></div>
+                            </div>
+                        </div>
+
+                        <!-- Drawing Mode Controls -->
+                        <div class="drawing-modes">
+                            <label>Drawing Mode:</label>
+                            <div class="drawing-mode-buttons">
+                                <button class="drawing-mode-btn active" data-mode="brush" title="Brush Tool">
+                                    <span class="mode-icon">🖌️</span>
+                                    <span class="mode-label">Brush</span>
+                                </button>
+                                <button id="eraserBtn" class="drawing-mode-btn" data-mode="eraser" title="Eraser Tool">
+                                    <span class="mode-icon">🧽</span>
+                                    <span class="mode-label">Eraser</span>
+                                </button>
+                                <button id="fillBtn" class="drawing-mode-btn" data-mode="fill" title="Fill Tool">
+                                    <span class="mode-icon">🪣</span>
+                                    <span class="mode-label">Fill</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+
+                <td class="canvas-column">
+                    <div class="canvas-section">
+                        <h3>Create Your Kolam</h3>
+                        <div class="canvas-container">
+                            <canvas id="kolamCanvas" width="500" height="500"></canvas>
+                            <div class="canvas-overlay" id="therapeuticOverlay"></div>
+                        </div>
+                        <div class="canvas-info">
+                            <p>🖱️ Click and drag to draw. Use the color picker and brush size controls for customization.</p>
+                            <p>⚖️ Enable symmetry for traditional kolam patterns.</p>
+                        </div>
+                    </div>
+                </td>
+
+                <td class="background-upload-column">
+                    <!-- Background Image Upload Section -->
+                    <div class="background-upload-section">
+                        <h4>📷 Background Image</h4>
+                        <p>(Optional)</p>
+                        <div id="backgroundUploadArea" class="background-upload-area">
+                            <div class="upload-icon">📷</div>
+                            <p>Click or drag to upload background image</p>
+                            <small>Use as reference for drawing kolam patterns</small>
+                        </div>
+                        <input type="file" id="backgroundFileInput" accept="image/*" style="display: none;">
+                        
+                        <!-- Background Controls -->
+                        <div id="backgroundControls" class="background-controls" style="display: none;">
+                            <div class="control-group">
+                                <label for="backgroundOpacity">Background Opacity:</label>
+                                <input type="range" id="backgroundOpacity" min="0.1" max="1" step="0.1" value="0.5">
+                            </div>
+                            <div class="control-buttons">
+                                <button id="toggleBackgroundBtn" class="btn-secondary">Hide Background</button>
+                                <button id="removeBackgroundBtn" class="btn-danger">Remove Background</button>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<!-- Pattern Gallery Tab -->
+<div class="tab-content" id="gallery">
+    <div class="gallery-section">
+        <h3>Traditional Kolam Patterns</h3>
+        <div class="filter-controls">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="basic">Basic</button>
+            <button class="filter-btn" data-filter="intermediate">Intermediate</button>
+            <button class="filter-btn" data-filter="advanced">Advanced</button>
+            <button class="filter-btn" data-filter="regional">Regional</button>
+        </div>
+        
+        <div class="gallery-grid">
+            <div class="gallery-item" data-category="basic">
+                <canvas class="pattern-canvas" width="150" height="150" data-pattern="simple-square"></canvas>
+                <h4>Simple Square</h4>
+                <p>Basic 4×4 dot pattern</p>
+            </div>
+            
+            <div class="gallery-item" data-category="intermediate">
+                <canvas class="pattern-canvas" width="150" height="150" data-pattern="flower-petals"></canvas>
+                <h4>Flower Petals</h4>
+                <p>8-fold symmetry pattern</p>
+            </div>
+            
+            <div class="gallery-item" data-category="advanced">
+                <canvas class="pattern-canvas" width="150" height="150" data-pattern="geometric-maze"></canvas>
+                <h4>Geometric Maze</h4>
+                <p>Complex interlocking design</p>
+            </div>
+            
+            <div class="gallery-item" data-category="regional">
+                <canvas class="pattern-canvas" width="150" height="150" data-pattern="tamil-traditional"></canvas>
+                <h4>Tamil Traditional</h4>
+                <p>Classic South Indian style</p>
+            </div>
+            
+            <div class="gallery-item" data-category="basic">
+                <canvas class="pattern-canvas" width="150" height="150" data-pattern="dot-grid"></canvas>
+                <h4>Dot Grid</h4>
+                <p>Foundation pattern</p>
+            </div>
+            
+            <div class="gallery-item" data-category="intermediate">
+                <canvas class="pattern-canvas" width="150" height="150" data-pattern="spiral-design"></canvas>
+                <h4>Spiral Design</h4>
+                <p>Curved line pattern</p>
+            </div>
+        </div>
+    </div>
+</div>
+            <!-- Pattern Gallery Tab -->
+            <div class="tab-content" id="gallery">
+                <div class="gallery-section">
+                    <h3>Traditional Kolam Patterns</h3>
+                    <div class="filter-controls">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="basic">Basic</button>
+                        <button class="filter-btn" data-filter="intermediate">Intermediate</button>
+                        <button class="filter-btn" data-filter="advanced">Advanced</button>
+                        <button class="filter-btn" data-filter="regional">Regional</button>
+                    </div>
+                    
+                    <div class="gallery-grid">
+                        <div class="gallery-item" data-category="basic">
+                            <canvas class="pattern-canvas" width="150" height="150" data-pattern="simple-square"></canvas>
+                            <h4>Simple Square</h4>
+                            <p>Basic 4×4 dot pattern</p>
+                        </div>
+                        
+                        <div class="gallery-item" data-category="intermediate">
+                            <canvas class="pattern-canvas" width="150" height="150" data-pattern="flower-petals"></canvas>
+                            <h4>Flower Petals</h4>
+                            <p>8-fold symmetry pattern</p>
+                        </div>
+                        
+                        <div class="gallery-item" data-category="advanced">
+                            <canvas class="pattern-canvas" width="150" height="150" data-pattern="geometric-maze"></canvas>
+                            <h4>Geometric Maze</h4>
+                            <p>Complex interlocking design</p>
+                        </div>
+                        
+                        <div class="gallery-item" data-category="regional">
+                            <canvas class="pattern-canvas" width="150" height="150" data-pattern="tamil-traditional"></canvas>
+                            <h4>Tamil Traditional</h4>
+                            <p>Classic South Indian style</p>
+                        </div>
+                        
+                        <div class="gallery-item" data-category="basic">
+                            <canvas class="pattern-canvas" width="150" height="150" data-pattern="dot-grid"></canvas>
+                            <h4>Dot Grid</h4>
+                            <p>Foundation pattern</p>
+                        </div>
+                        
+                        <div class="gallery-item" data-category="intermediate">
+                            <canvas class="pattern-canvas" width="150" height="150" data-pattern="spiral-design"></canvas>
+                            <h4>Spiral Design</h4>
+                            <p>Curved line pattern</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pattern Gallery Tab -->
+            <div class="tab-content" id="gallery">
+                <div class="gallery-section">
+                    <h3>Traditional Kolam Patterns</h3>
+                    <div class="filter-controls">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="basic">Basic</button>
+                        <button class="filter-btn" data-filter="intermediate">Intermediate</button>
+                        <button class="filter-btn" data-filter="advanced">Advanced</button>
+                        <button class="filter-btn" data-filter="regional">Regional</button>
+                    </div>
+                    
+                    <div class="gallery-grid">
+                        <div class="gallery-item" data-category="basic">
+                            <canvas class="pattern-canvas" width="150" height="150" data-pattern="simple-square"></canvas>
+                            <h4>Simple Square</h4>
+                            <p>Basic 4×4 dot pattern</p>
+                        </div>
+                        
+                        <div class="gallery-item" data-category="intermediate">
+                            <canvas class="pattern-canvas" width="150" height="150" data-pattern="flower-petals"></canvas>
+                            <h4>Flower Petals</h4>
+                            <p>8-fold symmetry pattern</p>
+                        </div>
+                        
+                        <div class="gallery-item" data-category="advanced">
+                            <canvas class="pattern-canvas" width="150" height="150" data-pattern="geometric-maze"></canvas>
+                            <h4>Geometric Maze</h4>
+                            <p>Complex interlocking design</p>
+                        </div>
+                        
+                        <div class="gallery-item" data-category="regional">
+                            <canvas class="pattern-canvas" width="150" height="150" data-pattern="tamil-traditional"></canvas>
+                            <h4>Tamil Traditional</h4>
+                            <p>Classic South Indian style</p>
+                        </div>
+                        
+                        <div class="gallery-item" data-category="basic">
+                            <canvas class="pattern-canvas" width="150" height="150" data-pattern="dot-grid"></canvas>
+                            <h4>Dot Grid</h4>
+                            <p>Foundation pattern</p>
+                        </div>
+                        
+                        <div class="gallery-item" data-category="intermediate">
+                            <canvas class="pattern-canvas" width="150" height="150" data-pattern="spiral-design"></canvas>
+                            <h4>Spiral Design</h4>
+                            <p>Curved line pattern</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Design Principles Tab -->
+            <div class="tab-content" id="principles">
+                <div class="principles-section">
+                    <h3>Mathematical Design Principles</h3>
+                    
+                    <div class="principle-cards">
+                        <div class="principle-card">
+                            <div class="principle-icon">⚪</div>
+                            <h4>Dot Grid Foundation</h4>
+                            <p>Kolams begin with a regular grid of dots that serve as anchor points for the design. The grid size determines the complexity level.</p>
+                            <div class="principle-visual">
+                                <canvas width="200" height="150" class="principle-canvas" data-demo="dots"></canvas>
+                            </div>
+                        </div>
+                        
+                        <div class="principle-card">
+                            <div class="principle-icon">🔄</div>
+                            <h4>Rotational Symmetry</h4>
+                            <p>Many kolams exhibit rotational symmetry, where the pattern looks identical when rotated by specific angles (90°, 180°, etc.).</p>
+                            <div class="principle-visual">
+                                <canvas width="200" height="150" class="principle-canvas" data-demo="rotation"></canvas>
+                            </div>
+                        </div>
+                        
+                        <div class="principle-card">
+                            <div class="principle-icon">🪞</div>
+                            <h4>Reflectional Symmetry</h4>
+                            <p>Patterns often mirror across one or more axes, creating balanced and harmonious designs.</p>
+                            <div class="principle-visual">
+                                <canvas width="200" height="150" class="principle-canvas" data-demo="reflection"></canvas>
+                            </div>
+                        </div>
+                        
+                        <div class="principle-card">
+                            <div class="principle-icon">🔗</div>
+                            <h4>Continuous Lines</h4>
+                            <p>Traditional kolams are drawn in one continuous line without lifting the drawing implement, creating closed loops.</p>
+                            <div class="principle-visual">
+                                <canvas width="200" height="150" class="principle-canvas" data-demo="continuous"></canvas>
+                            </div>
+                        </div>
+                        
+                        <div class="principle-card">
+                            <div class="principle-icon">🔢</div>
+                            <h4>Mathematical Ratios</h4>
+                            <p>Spacing and proportions often follow mathematical relationships, creating visually pleasing compositions.</p>
+                            <div class="principle-visual">
+                                <canvas width="200" height="150" class="principle-canvas" data-demo="ratios"></canvas>
+                            </div>
+                        </div>
+                        
+                        <div class="principle-card">
+                            <div class="principle-icon">🌸</div>
+                            <h4>Fractal Properties</h4>
+                            <p>Some complex kolams exhibit self-similar patterns at different scales, resembling fractal geometry.</p>
+                            <div class="principle-visual">
+                                <canvas width="200" height="150" class="principle-canvas" data-demo="fractal"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <div class="footer-content">
+                <p>© 2024 Kolam Design Analyzer | AICTE Indian Knowledge Systems Project</p>
+                <div class="footer-links">
+                    <a href="about.html">About</a>
+                    <a href="main.html">Research</a>
+                    <a href="#contact">Contact</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <div class="loading-overlay" id="loadingOverlay" style="display: none;">
+        <div class="loading-spinner"></div>
+        <p>Analyzing kolam pattern...</p>
+    </div>
+
+    <!-- Kolam AI Generator Chatbox -->
+    <div class="kolam-chatbox" id="kolamChatbox">
+        <div class="chatbox-header" onclick="toggleChatbox()">
+            <div class="header-content">
+                <div class="kolam-icon">🕉</div>
+                <div class="header-text">
+                    <h3>Kolam AI Generator</h3>
+                    <p>Create beautiful Kolam designs</p>
+                </div>
+            </div>
+            <button class="close-btn" onclick="closeChatbox(event)">×</button>
+        </div>
+        
+        <div class="chatbox-body">
+            <div class="chat-messages" id="chatMessages">
+                <div class="welcome-message">
+                    <h4>🕉 Welcome to Kolam AI Generator!</h4>
+                    <p>I can create beautiful traditional Kolam designs for you. Simply describe what you'd like or click on one of the suggestions below to get started.</p>
+                </div>
+            </div>
+            
+            <div class="prompt-suggestions">
+                <div class="suggestions-title">✨ Try these prompts:</div>
+                <div class="suggestion-chips">
+                    <button class="suggestion-chip" onclick="usePrompt('Traditional lotus kolam with dots')">Lotus Kolam</button>
+                    <button class="suggestion-chip" onclick="usePrompt('Geometric rangoli pattern with vibrant colors')">Geometric Pattern</button>
+                    <button class="suggestion-chip" onclick="usePrompt('Peacock kolam design with traditional dots')">Peacock Design</button>
+                    <button class="suggestion-chip" onclick="usePrompt('Diya festival kolam with intricate patterns')">Festival Kolam</button>
+                    <button class="suggestion-chip" onclick="usePrompt('Simple daily kolam with rice flour')">Daily Kolam</button>
+                    <button class="suggestion-chip" onclick="usePrompt('Wedding special kolam with flowers')">Wedding Kolam</button>
+                </div>
+            </div>
+            
+            <div class="input-section">
+                <div class="input-container">
+                    <input type="text" class="message-input" id="messageInput" 
+                           placeholder="Describe your Kolam design..." 
+                           onkeypress="handleKeyPress(event)">
+                    <button class="send-btn" id="sendBtn" onclick="sendMessage()">
+                        ➤
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+.chat-messages {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto; /* Enable vertical scrolling */
+    max-height: calc(600px - 200px); /* Set max height to allow scrolling */
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    scroll-behavior: smooth; /* Smooth scrolling */
+}
+
+/* Fix for minimized state */
+.minimized .chat-messages {
+    max-height: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.generated-image {
+    margin-top: 15px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    border: 3px solid #667eea;
+    background: linear-gradient(145deg, #667eea, #764ba2);
+    padding: 5px;
+    position: relative;
+    animation: imageAppear 0.6s ease;
+    max-width: 100%; /* Ensure image container fits */
+}
+
+.generated-image img {
+    width: 100%;
+    max-width: 300px; /* Limit image width */
+    height: auto;
+    display: block;
+    border-radius: 15px;
+    transition: transform 0.3s ease;
+}
+
+/* Ensure proper scrollbar styling */
+.chat-messages::-webkit-scrollbar {
+    width: 6px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+    background: rgba(102, 126, 234, 0.5);
+    border-radius: 3px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb:hover {
+    background: rgba(102, 126, 234, 0.7);
+}
+
+/* Improve message content max width */
+.message-content {
+    display: inline-block;
+    max-width: 85%; /* Slightly more space for text */
+    padding: 12px 16px;
+    border-radius: 20px;
+    font-family: 'Arial', sans-serif;
+    font-size: 14px;
+    line-height: 1.4;
+    word-wrap: break-word; /* Handle long words */
+}
+
+/* Make image actions more compact */
+.image-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px; /* Reduced gap */
+    margin-top: 10px;
+    padding: 0 8px;
+}
+
+.download-btn, .share-btn {
+    flex: 1;
+    padding: 8px 12px; /* Smaller padding */
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 12px; /* Smaller font */
+    font-weight: bold;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+</style>
+    <script>
+
+// Kolam AI Generator JavaScript - Fixed Version
+let isMinimized = false;
+let messageHistory = [];
+let kolamCounter = 1;
+
+function toggleChatbox() {
+    const chatbox = document.getElementById('kolamChatbox');
+    isMinimized = !isMinimized;
+    chatbox.classList.toggle('minimized', isMinimized);
+}
+
+function closeChatbox(event) {
+    event.stopPropagation();
+    const chatbox = document.getElementById('kolamChatbox');
+    chatbox.style.display = 'none';
+}
+
+function usePrompt(prompt) {
+    const messageInput = document.getElementById('messageInput');
+    messageInput.value = prompt;
+    sendMessage();
+}
+
+function handleKeyPress(event) {
+    if (event.key === 'Enter') {
+        sendMessage();
+    }
+}
+
+function addMessage(content, isUser = false, hasImage = false, imageUrl = null) {
+    const chatMessages = document.getElementById('chatMessages');
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
+    
+    let messageHTML = `<div class="message-content">${content}</div>`;
+    
+    if (hasImage && imageUrl) {
+        messageHTML += `
+            <div class="generated-image">
+                <img src="${imageUrl}" alt="Generated Kolam Design" />
+                <div class="image-actions">
+                    <button class="download-btn" onclick="downloadImage('${imageUrl}')">
+                        📥 Download
+                    </button>
+                    <button class="share-btn" onclick="shareImage('${imageUrl}')">
+                        🔗 Share
+                    </button>
+                </div>
+            </div>
+        `;
+    }
+    
+    messageDiv.innerHTML = messageHTML;
+    chatMessages.appendChild(messageDiv);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+function showTypingIndicator() {
+    const chatMessages = document.getElementById('chatMessages');
+    const typingDiv = document.createElement('div');
+    typingDiv.className = 'message bot';
+    typingDiv.id = 'typingIndicator';
+    typingDiv.innerHTML = `
+        <div class="typing-indicator show">
+            <div class="typing-dot"></div>
+            <div class="typing-dot"></div>
+            <div class="typing-dot"></div>
+        </div>
+    `;
+    chatMessages.appendChild(typingDiv);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+function hideTypingIndicator() {
+    const typingIndicator = document.getElementById('typingIndicator');
+    if (typingIndicator) {
+        typingIndicator.remove();
+    }
+}
+
+function generateKolamImage(prompt) {
+    return new Promise((resolve) => {
+        // Create canvas for kolam generation
+        const canvas = document.createElement('canvas');
+        canvas.width = 400;
+        canvas.height = 400;
+        const ctx = canvas.getContext('2d');
+        
+        // Clear canvas and set background
+        ctx.fillStyle = '#fff8e1';
+        ctx.fillRect(0, 0, 400, 400);
+        
+        // Analyze prompt for design type
+        const promptLower = prompt.toLowerCase();
+        
+        // Generate kolam based on prompt keywords
+        if (promptLower.includes('lotus')) {
+            generateLotusKolam(ctx);
+        } else if (promptLower.includes('peacock')) {
+            generatePeacockKolam(ctx);
+        } else if (promptLower.includes('geometric')) {
+            generateGeometricKolam(ctx);
+        } else if (promptLower.includes('festival') || promptLower.includes('diya')) {
+            generateFestivalKolam(ctx);
+        } else if (promptLower.includes('wedding') || promptLower.includes('flower')) {
+            generateWeddingKolam(ctx);
+        } else if (promptLower.includes('simple') || promptLower.includes('daily')) {
+            generateSimpleKolam(ctx);
+        } else {
+            generateDefaultKolam(ctx, prompt);
+        }
+        
+        // Convert canvas to image URL
+        const imageUrl = canvas.toDataURL('image/png');
+        resolve(imageUrl);
+    });
+}
+
+function generateLotusKolam(ctx) {
+    // Background gradient
+    const gradient = ctx.createRadialGradient(200, 200, 0, 200, 200, 200);
+    gradient.addColorStop(0, '#fce4ec');
+    gradient.addColorStop(1, '#f8bbd9');
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, 400, 400);
+    
+    // Draw lotus petals
+    ctx.fillStyle = '#e91e63';
+    for (let i = 0; i < 8; i++) {
+        const angle = (i * Math.PI * 2) / 8;
+        const x = 200 + 80 * Math.cos(angle);
+        const y = 200 + 80 * Math.sin(angle);
+        
+        ctx.beginPath();
+        ctx.ellipse(x, y, 25, 15, angle, 0, Math.PI * 2);
+        ctx.fill();
+    }
+    
+    // Center circle
+    ctx.fillStyle = '#ffeb3b';
+    ctx.beginPath();
+    ctx.arc(200, 200, 30, 0, 2 * Math.PI);
+    ctx.fill();
+    
+    // Add dots around
+    ctx.fillStyle = '#4caf50';
+    for (let i = 0; i < 12; i++) {
+        const angle = (i * Math.PI * 2) / 12;
+        const x = 200 + 120 * Math.cos(angle);
+        const y = 200 + 120 * Math.sin(angle);
+        ctx.beginPath();
+        ctx.arc(x, y, 5, 0, 2 * Math.PI);
+        ctx.fill();
+    }
+}
+
+function generatePeacockKolam(ctx) {
+    // Peacock theme background
+    const gradient = ctx.createRadialGradient(200, 200, 0, 200, 200, 200);
+    gradient.addColorStop(0, '#e3f2fd');
+    gradient.addColorStop(1, '#1976d2');
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, 400, 400);
+    
+    // Peacock body
+    ctx.fillStyle = '#1a237e';
+    ctx.beginPath();
+    ctx.arc(200, 250, 25, 0, 2 * Math.PI);
+    ctx.fill();
+    
+    // Feathers
+    const featherColors = ['#00bcd4', '#009688', '#4caf50'];
+    for (let i = 0; i < 12; i++) {
+        const angle = (i * Math.PI * 2) / 12;
+        
+        // Feather stem
+        ctx.strokeStyle = '#2e7d32';
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.moveTo(200, 250);
+        ctx.lineTo(200 + 100 * Math.cos(angle - Math.PI/2), 250 + 100 * Math.sin(angle - Math.PI/2));
+        ctx.stroke();
+        
+        // Feather eye
+        const eyeX = 200 + 90 * Math.cos(angle - Math.PI/2);
+        const eyeY = 250 + 90 * Math.sin(angle - Math.PI/2);
+        
+        ctx.fillStyle = featherColors[i % 3];
+        ctx.beginPath();
+        ctx.arc(eyeX, eyeY, 12, 0, 2 * Math.PI);
+        ctx.fill();
+        
+        ctx.fillStyle = '#fff';
+        ctx.beginPath();
+        ctx.arc(eyeX, eyeY, 6, 0, 2 * Math.PI);
+        ctx.fill();
+    }
+}
+
+function generateGeometricKolam(ctx) {
+    // Geometric background
+    const gradient = ctx.createRadialGradient(200, 200, 0, 200, 200, 200);
+    gradient.addColorStop(0, '#fff3e0');
+    gradient.addColorStop(1, '#ff8f00');
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, 400, 400);
+    
+    const colors = ['#e53935', '#1e88e5', '#43a047', '#fb8c00'];
+    
+    // Draw concentric shapes
+    for (let layer = 0; layer < 4; layer++) {
+        ctx.fillStyle = colors[layer];
+        const sides = 6 + layer;
+        const radius = 120 - (layer * 20);
+        
+        ctx.beginPath();
+        for (let i = 0; i < sides; i++) {
+            const angle = (i * Math.PI * 2) / sides;
+            const x = 200 + radius * Math.cos(angle);
+            const y = 200 + radius * Math.sin(angle);
+            
+            if (i === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+        }
+        ctx.closePath();
+        ctx.fill();
+    }
+}
+
+function generateFestivalKolam(ctx) {
+    // Festival background
+    const gradient = ctx.createRadialGradient(200, 200, 0, 200, 200, 200);
+    gradient.addColorStop(0, '#fff8e1');
+    gradient.addColorStop(1, '#ff8f00');
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, 400, 400);
+    
+    // Draw diyas (oil lamps)
+    const diyaPositions = [
+        {x: 100, y: 100}, {x: 300, y: 100}, 
+        {x: 100, y: 300}, {x: 300, y: 300},
+        {x: 200, y: 50}, {x: 350, y: 200},
+        {x: 200, y: 350}, {x: 50, y: 200}
+    ];
+    
+    diyaPositions.forEach(pos => {
+        // Diya base
+        ctx.fillStyle = '#d84315';
+        ctx.beginPath();
+        ctx.ellipse(pos.x, pos.y, 20, 12, 0, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // Flame
+        ctx.fillStyle = '#ffeb3b';
+        ctx.beginPath();
+        ctx.ellipse(pos.x, pos.y - 12, 6, 12, 0, 0, Math.PI * 2);
+        ctx.fill();
+    });
+    
+    // Central mandala
+    ctx.fillStyle = '#4caf50';
+    ctx.beginPath();
+    ctx.arc(200, 200, 50, 0, 2 * Math.PI);
+    ctx.fill();
+}
+
+function generateWeddingKolam(ctx) {
+    // Wedding theme
+    const gradient = ctx.createRadialGradient(200, 200, 0, 200, 200, 200);
+    gradient.addColorStop(0, '#fce4ec');
+    gradient.addColorStop(1, '#f06292');
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, 400, 400);
+    
+    // Flower patterns
+    const flowerColors = ['#e91e63', '#ff5722', '#ffeb3b', '#4caf50'];
+    
+    // Central large flower
+    for (let i = 0; i < 12; i++) {
+        const angle = (i * Math.PI * 2) / 12;
+        const x = 200 + 50 * Math.cos(angle);
+        const y = 200 + 50 * Math.sin(angle);
+        
+        ctx.fillStyle = '#e91e63';
+        ctx.beginPath();
+        ctx.arc(x, y, 15, 0, 2 * Math.PI);
+        ctx.fill();
+    }
+    
+    // Surrounding flowers
+    for (let ring = 0; ring < 2; ring++) {
+        const radius = 100 + (ring * 40);
+        const flowers = 8;
+        
+        for (let i = 0; i < flowers; i++) {
+            const angle = (i * Math.PI * 2) / flowers;
+            const centerX = 200 + radius * Math.cos(angle);
+            const centerY = 200 + radius * Math.sin(angle);
+            
+            ctx.fillStyle = flowerColors[i % flowerColors.length];
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, 10, 0, 2 * Math.PI);
+            ctx.fill();
+        }
+    }
+}
+
+function generateSimpleKolam(ctx) {
+    // Simple white background
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, 400, 400);
+    
+    // Draw dot grid
+    ctx.fillStyle = '#d32f2f';
+    const dotSize = 6;
+    const spacing = 30;
+    
+    for (let x = 50; x <= 350; x += spacing) {
+        for (let y = 50; y <= 350; y += spacing) {
+            ctx.beginPath();
+            ctx.arc(x, y, dotSize, 0, 2 * Math.PI);
+            ctx.fill();
+        }
+    }
+    
+    // Connect dots with lines
+    ctx.strokeStyle = '#1976d2';
+    ctx.lineWidth = 2;
+    
+    for (let x = 50; x <= 350; x += spacing) {
+        ctx.beginPath();
+        ctx.moveTo(x, 50);
+        ctx.lineTo(x, 350);
+        ctx.stroke();
+    }
+    
+    for (let y = 50; y <= 350; y += spacing) {
+        ctx.beginPath();
+        ctx.moveTo(50, y);
+        ctx.lineTo(350, y);
+        ctx.stroke();
+    }
+}
+
+function generateDefaultKolam(ctx, prompt) {
+    // Default pattern based on prompt
+    const gradient = ctx.createRadialGradient(200, 200, 0, 200, 200, 200);
+    gradient.addColorStop(0, '#f3e5f5');
+    gradient.addColorStop(1, '#9c27b0');
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, 400, 400);
+    
+    // Generate pattern based on prompt hash
+    const hash = prompt.split('').reduce((a, b) => {
+        a = ((a << 5) - a) + b.charCodeAt(0);
+        return a & a;
+    }, 0);
+    
+    const elements = Math.abs(hash % 10) + 6;
+    const colors = ['#e91e63', '#2196f3', '#4caf50', '#ff9800', '#9c27b0'];
+    
+    for (let i = 0; i < elements; i++) {
+        const angle = (i * Math.PI * 2) / elements;
+        const radius = 60 + (Math.abs(hash + i) % 40);
+        const x = 200 + radius * Math.cos(angle);
+        const y = 200 + radius * Math.sin(angle);
+        
+        ctx.fillStyle = colors[i % colors.length];
+        ctx.beginPath();
+        ctx.arc(x, y, 15 + (Math.abs(hash + i * 2) % 10), 0, 2 * Math.PI);
+        ctx.fill();
+    }
+    
+    // Center element
+    ctx.fillStyle = '#ffeb3b';
+    ctx.beginPath();
+    ctx.arc(200, 200, 20, 0, 2 * Math.PI);
+    ctx.fill();
+}
+
+async function sendMessage() {
+    const messageInput = document.getElementById('messageInput');
+    const sendBtn = document.getElementById('sendBtn');
+    const message = messageInput.value.trim();
+    
+    if (!message) return;
+    
+    // Add user message
+    addMessage(message, true);
+    messageInput.value = '';
+    sendBtn.disabled = true;
+    
+    // Show typing indicator
+    showTypingIndicator();
+    
+    try {
+        // Generate response message
+        const responses = [
+            `Creating a beautiful ${message.toLowerCase()} design with traditional motifs...`,
+            `Designing your ${message.toLowerCase()} with sacred geometry patterns...`,
+            `Generating a stunning ${message.toLowerCase()} kolam for you...`,
+            `Crafting your custom ${message.toLowerCase()} with mathematical precision...`
+        ];
+        
+        const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+        
+        // Wait a moment, then show response
+        setTimeout(async () => {
+            hideTypingIndicator();
+            addMessage(randomResponse);
+            
+            // Show typing indicator for image generation
+            showTypingIndicator();
+            
+            // Generate the kolam image
+            const imageUrl = await generateKolamImage(message);
+            hideTypingIndicator();
+            
+            // Show final message with image
+            addMessage("🎨 Here's your beautiful Kolam design! This traditional pattern combines sacred geometry with artistic beauty. Download or share it below:", false, true, imageUrl);
+            
+            sendBtn.disabled = false;
+        }, 1500);
+        
+    } catch (error) {
+        hideTypingIndicator();
+        addMessage("I apologize, but I encountered an error while generating your Kolam design. Please try again!");
+        sendBtn.disabled = false;
+    }
+}
+
+function downloadImage(imageUrl) {
+    const link = document.createElement('a');
+    link.download = `kolam-design-${Date.now()}.png`;
+    link.href = imageUrl;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    // Show success message
+    setTimeout(() => {
+        addMessage("✅ Your Kolam design has been downloaded successfully! Thank you for using our generator.");
+    }, 500);
+}
+
+function shareImage(imageUrl) {
+    if (navigator.share) {
+        navigator.share({
+            title: 'Beautiful Kolam Design',
+            text: 'Check out this beautiful Kolam design I created!',
+            url: imageUrl
+        });
+    } else {
+        navigator.clipboard.writeText(imageUrl).then(() => {
+            addMessage("🔗 Image URL copied to clipboard! You can now paste and share it anywhere.");
+        });
+    }
+}
+
+// Initialize chatbox when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    // Add initial greeting after a short delay
+    setTimeout(() => {
+        if (document.getElementById('chatMessages').children.length <= 1) {
+            addMessage("Hello! I'm your Kolam AI assistant. I can create beautiful traditional Kolam designs instantly without requiring any API keys. Simply describe what kind of kolam you'd like, and I'll generate a unique pattern for you!");
+        }
+    }, 1000);
+});
+    </script>
+    
+    <script src="script.js"></script>
+</body>
+<div style="width:100%;text-align:center;margin:40px 0 20px 0;font-size:1.2em;">
+    <p>
+        Having problem in making Kolam? <a href="learn.html" target="_blank" style="color:#2575fc;text-decoration:underline;font-weight:bold;">Learn with us</a>
+    </p>
+</div>
+</html>
+
             bottom: 20px;
             right: 20px;
             width: 400px;
