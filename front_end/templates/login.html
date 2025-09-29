@@ -1,0 +1,627 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kolam Design Analyzer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Video Container - Initially visible */
+        #video-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.8s ease-in-out;
+        }
+
+        #intro-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Login Page - Pre-loaded behind video */
+        #login-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            /* Updated background image path using Django static */
+            background-image:
+                url("../static/pictures/login_bg.jpg"),
+                linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            z-index: 999;
+            transition: opacity 0.8s ease-in-out;
+        }
+
+        #login-page.show {
+            opacity: 1;
+            z-index: 1001;
+        }
+
+        /* Overlay for better text readability */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(2px);
+        }
+
+        .login-container {
+            position: relative;
+            z-index: 2;
+            /* Updated login container background image using Django static */
+            background-image: url("../static/pictures/login_pg.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 50px 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            max-width: 450px;
+            width: 90%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: slideUp 0.8s ease-out;
+            /* Add overlay for better text readability over image */
+            overflow: hidden;
+        }
+
+        /* Add an overlay inside the login container for better text readability */
+        .login-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.85); /* Semi-transparent white overlay */
+            border-radius: 20px;
+            z-index: -1;
+        }
+
+        /* Alternative: If you want the image to be more visible, use a darker overlay */
+        .login-container.dark-overlay::before {
+            background: rgba(0, 0, 0, 0.6); /* Dark overlay for light text */
+        }
+
+        /* Adjust text colors for better visibility over image */
+        .login-container.dark-overlay .app-title,
+        .login-container.dark-overlay .hindi-quote,
+        .login-container.dark-overlay .english-translation,
+        .login-container.dark-overlay label {
+            color: white;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .logo-section {
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .app-title {
+            font-size: 2.2em;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hindi-quote {
+            font-size: 1.1em;
+            color: #555;
+            font-style: italic;
+            margin-bottom: 8px;
+            font-family: 'Georgia', serif;
+        }
+
+        .english-translation {
+            font-size: 0.95em;
+            color: #777;
+            margin-bottom: 30px;
+        }
+
+        .form-toggle {
+            display: flex;
+            background: rgba(248, 249, 250, 0.9);
+            border-radius: 10px;
+            margin-bottom: 30px;
+            padding: 4px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .toggle-btn {
+            flex: 1;
+            padding: 12px;
+            background: transparent;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .toggle-btn.active {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .form-section {
+            position: relative;
+            z-index: 1;
+        }
+
+        .signup-form {
+            display: none;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+            font-size: 0.9em;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid #e1e8ed;
+            border-radius: 10px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            background: rgba(255, 255, 255, 1);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .forgot-password {
+            margin-top: 15px;
+        }
+
+        .forgot-password a {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 0.9em;
+            transition: color 0.3s ease;
+        }
+
+        .forgot-password a:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+
+        /* Decorative elements */
+        .decorative-pattern {
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(45deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            border-radius: 50%;
+            z-index: -2;
+        }
+
+        .decorative-pattern::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2));
+            border-radius: 50%;
+        }
+
+        /* Skip video button */
+        .skip-btn {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+
+        .skip-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 40px 25px;
+                margin: 20px;
+            }
+            
+            .app-title {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Video Container -->
+    <div id="video-container">
+        <button class="skip-btn" onclick="skipVideo()">Skip Video</button>
+        <!-- Updated video source path using Django static -->
+        <video id="intro-video" autoplay muted>
+            <source src="../static/videos/intro.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <!-- Login Page -->
+    <div id="login-page">
+        <div class="overlay"></div>
+        <!-- Add 'dark-overlay' class if you want dark overlay for light text -->
+        <div class="login-container">
+            <div class="decorative-pattern"></div>
+            
+            <div class="logo-section">
+                <h1 class="app-title">Kolam Design Analyzer</h1>
+                <p class="hindi-quote">"कोलम रंगों में बंधी आत्मा की प्रार्थना है।"</p>
+                <p class="english-translation">"Kolam is a prayer of the soul woven in colors."</p>
+            </div>
+
+            <div class="form-toggle">
+                <button class="toggle-btn active" onclick="showLogin()">Login</button>
+                <button class="toggle-btn" onclick="showSignup()">Sign Up</button>
+            </div>
+
+            <div class="form-section">
+                <!-- Login Form -->
+                <form class="login-form" id="loginForm">
+                    <div class="input-group">
+                        <label for="loginEmail">Email Address</label>
+                        <input type="email" id="loginEmail" name="email" required>
+                    </div>
+                   <div class="input-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" name="password" required>
+                    <div id="loginError" style="color: red; font-size: 0.9em; margin-top: 5px;"></div>
+                </div>
+
+                    <button type="submit" class="submit-btn">Sign In to Analyze</button>
+                   <a href="#" id="forgotPassword">Forgot Password?</a>
+
+                </form>
+
+                <!-- Signup Form -->
+                <form class="signup-form" id="signupForm">
+                    <div class="input-group">
+                        <label for="signupName">Full Name</label>
+                        <input type="text" id="signupName" name="name" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="signupEmail">Email Address</label>
+                        <input type="email" id="signupEmail" name="email" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="signupPassword">Password</label>
+                        <input type="password" id="signupPassword" name="password" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" required>
+                    </div>
+                    <button type="submit" class="submit-btn">Create Account</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Video handling
+        const video = document.getElementById('intro-video');
+        const videoContainer = document.getElementById('video-container');
+        const loginPage = document.getElementById('login-page');
+
+        // Show login page when video ends
+        video.addEventListener('ended', showLoginPage);
+
+        function skipVideo() {
+            showLoginPage();
+        }
+
+        function showLoginPage() {
+            // Start both transitions simultaneously to avoid white flash
+            videoContainer.style.opacity = '0';
+            loginPage.classList.add('show');
+            
+            // Hide video container completely after transition
+            setTimeout(() => {
+                videoContainer.style.display = 'none';
+            }, 800);
+        }
+
+        // Form toggle functionality
+        function showLogin() {
+            document.querySelector('.login-form').style.display = 'block';
+            document.querySelector('.signup-form').style.display = 'none';
+            
+            document.querySelectorAll('.toggle-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.toggle-btn')[0].classList.add('active');
+        }
+
+        function showSignup() {
+            document.querySelector('.login-form').style.display = 'none';
+            document.querySelector('.signup-form').style.display = 'block';
+            
+            document.querySelectorAll('.toggle-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.toggle-btn')[1].classList.add('active');
+        }
+
+
+        // Auto-show login page after 3 seconds if video doesn't load or play
+        setTimeout(() => {
+            if (videoContainer.style.display !== 'none') {
+                console.log('Video not loading, showing login page');
+                showLoginPage();
+            }
+        }, 3000);
+
+        // Check if video is loading
+        video.addEventListener('loadstart', () => {
+            console.log('Video started loading');
+        });
+
+        video.addEventListener('error', (e) => {
+            console.log('Video error:', e);
+            showLoginPage();
+        });
+
+        video.addEventListener('canplay', () => {
+            console.log('Video can start playing');
+        });
+    </script>
+    <script type="module">
+        // ✅ Import Firebase SDKs
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-analytics.js";
+
+        // 🔹 Your Firebase config
+        const firebaseConfig = {
+        apiKey: "AIzaSyBvp2E8q221qU6qgTKBVD-ak68OOQ1yyTs",
+        authDomain: "kolam-b82f4.firebaseapp.com",
+        projectId: "kolam-b82f4",
+        storageBucket: "kolam-b82f4.appspot.com",
+        messagingSenderId: "869946246676",
+        appId: "1:869946246676:web:de9f147841a94526a3c901",
+        measurementId: "G-GQJRQRS7B1"
+        };
+
+        // 🔹 Initialize Firebase (app first, then auth)
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const analytics = getAnalytics(app);
+
+        // 🔹 LOGIN FORM
+        const loginForm = document.getElementById('loginForm');
+        const loginError = document.getElementById('loginError');
+
+        loginForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        loginError.textContent = "";
+
+        const email = document.getElementById('loginEmail').value;
+        const password = document.getElementById('loginPassword').value;
+
+        try {
+            const userCredential = await signInWithEmailAndPassword(auth, email, password);
+            console.log("Login success:", userCredential.user);
+            window.location.href = "/";
+        } catch (error) {
+            loginError.textContent = "❌ Wrong email or password!";
+            console.error(error);
+        }
+        });
+
+        // 🔹 SIGNUP FORM
+        const signupForm = document.getElementById('signupForm');
+
+        signupForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const name = document.getElementById('signupName').value;
+        const email = document.getElementById('signupEmail').value;
+        const password = document.getElementById('signupPassword').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+
+        if (password !== confirmPassword) {
+            alert("Passwords do not match!");
+            return;
+        }
+
+        try {
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            console.log("Signup success:", userCredential.user);
+
+            alert("✅ Account created successfully! Please login.");
+            showLogin();
+        } catch (error) {
+            alert("Signup Error: " + error.message);
+            console.error(error);
+        }
+        });
+    </script>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+        import { getAuth, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+
+        // Firebase config
+        const firebaseConfig = {
+        apiKey: "AIzaSyBvp2E8q221qU6qgTKBVD-ak68OOQ1yyTs",
+        authDomain: "kolam-b82f4.firebaseapp.com",
+        projectId: "kolam-b82f4",
+        storageBucket: "kolam-b82f4.appspot.com",
+        messagingSenderId: "869946246676",
+        appId: "1:869946246676:web:de9f147841a94526a3c901",
+        measurementId: "G-GQJRQRS7B1"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Email validation function
+        function isValidEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+        }
+
+        // Forgot Password with improved error handling
+        document.getElementById("forgotPassword").addEventListener("click", function(e) {
+        e.preventDefault();
+        
+        const email = prompt("Enter your registered email to reset password:");
+        
+        // Better email validation
+        if (!email || !isValidEmail(email)) {
+            alert("⚠️ Please enter a valid email address.");
+            return;
+        }
+        
+        console.log("Attempting to send password reset email to:", email);
+        
+        // Simplified approach - remove actionCodeSettings first to test
+        sendPasswordResetEmail(auth, email)
+            .then(() => {
+            console.log("✅ Password reset email sent successfully");
+            alert(`✅ Password reset email sent to ${email}! 
+            
+        Please check:
+        • Your inbox
+        • Spam/Junk folder
+        • Promotions tab (Gmail)
+
+        The email may take a few minutes to arrive.`);
+            })
+            .catch((error) => {
+            console.error("❌ Password reset error:", error);
+            
+            // Handle specific error codes
+            switch(error.code) {
+                case 'auth/user-not-found':
+                alert("❌ No account found with this email address. Please check your email or sign up.");
+                break;
+                case 'auth/invalid-email':
+                alert("❌ Invalid email format. Please enter a valid email address.");
+                break;
+                case 'auth/too-many-requests':
+                alert("❌ Too many reset attempts. Please wait a few minutes before trying again.");
+                break;
+                case 'auth/network-request-failed':
+                alert("❌ Network error. Please check your internet connection and try again.");
+                break;
+                default:
+                alert(`❌ Error: ${error.message}\nCode: ${error.code}`);
+            }
+            });
+        });
+
+        // Optional: Add a function to test if Firebase is properly initialized
+        function testFirebaseConnection() {
+        console.log("Firebase App:", app);
+        console.log("Firebase Auth:", auth);
+        console.log("Auth Domain:", firebaseConfig.authDomain);
+        }
+
+        // Call this to verify Firebase is working
+        testFirebaseConnection();
+    </script>
+
+
+
+</body>
+</html>
