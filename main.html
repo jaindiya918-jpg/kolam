@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research on Kolam – Ancient Tamil Folk Art</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #2d3748;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+            padding: 50px 40px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1.5" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="80" r="1" fill="rgba(255,255,255,0.1)"/></svg>');
+            animation: float 20s linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateX(-100px) rotate(0deg); }
+            100% { transform: translateX(100px) rotate(360deg); }
+        }
+
+        .header h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            font-weight: 300;
+            position: relative;
+            z-index: 1;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .content {
+            padding: 50px 40px;
+        }
+
+        .description {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .description h2 {
+            font-size: 2rem;
+            color: #2d3748;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .description p {
+            font-size: 1.1rem;
+            color: #4a5568;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            line-height: 1.8;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px auto;
+            max-width: 700px;
+            border: 1px solid rgba(102, 126, 234, 0.1);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .highlight-box h3 {
+            color: #2d3748;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .highlight-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .highlight-list li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            color: #4a5568;
+            font-size: 1rem;
+        }
+
+        .highlight-list li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: #ff6b6b;
+            font-size: 1.2rem;
+        }
+
+        .gallery-section {
+            margin-top: 60px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            color: #2d3748;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #4a5568;
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            background: white;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.08);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, black);
+            color: yellow;
+            padding: 25px;
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        .gallery-overlay h4 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .gallery-overlay p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            line-height: 1.4;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            animation: modalFadeIn 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 90vw;
+            max-height: 90vh;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            font-weight: 300;
+            cursor: pointer;
+            z-index: 2001;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: rgba(0, 0, 0, 0.8);
+            transform: rotate(90deg);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px;
+            background: #f8fafc;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .header {
+                padding: 40px 25px;
+            }
+
+            .header h1 {
+                font-size: 2.2rem;
+            }
+
+            .header p {
+                font-size: 1.1rem;
+            }
+
+            .content {
+                padding: 40px 25px;
+            }
+
+            .description h2 {
+                font-size: 1.7rem;
+            }
+
+            .gallery {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .gallery-item img {
+                height: 200px;
+            }
+
+            .highlight-box {
+                padding: 25px 20px;
+                margin: 20px 10px;
+            }
+
+            .modal-close {
+                top: 15px;
+                right: 20px;
+                font-size: 30px;
+                width: 40px;
+                height: 40px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .header p {
+                font-size: 1rem;
+            }
+
+            .description h2 {
+                font-size: 1.5rem;
+            }
+
+            .section-title {
+                font-size: 1.7rem;
+            }
+
+            .gallery {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+
+            .gallery-item img {
+                height: 160px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Research on Kolam</h1>
+            <p>Ancient Tamil Folk Art – Sacred Geometry and Cultural Heritage</p>
+        </header>
+
+        <div class="content">
+            <section class="description">
+                <h2>About This Research</h2>
+                <p>
+                    Kolam is a traditional form of drawing practiced by Tamil women, created using rice powder, chalk, or white rock powder. 
+                    This ancient art form combines mathematical precision with spiritual significance, transforming everyday doorsteps into 
+                    canvases of sacred geometry and cultural expression.
+                </p>
+                
+                <p>
+                    Dating back over 5,000 years, Kolam represents one of the world's oldest continuous artistic traditions. Each morning, 
+                    women across Tamil Nadu create these intricate patterns at their home entrances, following unwritten rules passed down 
+                    through generations. The practice serves multiple purposes: welcoming guests and deities, providing food for small 
+                    creatures like ants, and maintaining a spiritual connection with the divine feminine energy.
+                </p>
+
+                <p>
+                    What makes Kolam particularly fascinating is its sophisticated mathematical foundation. The art form employs complex 
+                    geometric principles including symmetry, topology, and fractal patterns. Many designs are based on a dot grid system 
+                    called "pulli," where lines flow around dots without crossing, creating closed loops that symbolize the cyclical 
+                    nature of life and the universe.
+                </p>
+
+                <p>
+                    This research explores Kolam not just as decorative art, but as a living laboratory of mathematical concepts, 
+                    cultural preservation, and women's knowledge systems. Through detailed analysis of traditional patterns, interviews 
+                    with practitioners, and mathematical modeling, we uncover how this ancient practice embodies profound philosophical 
+                    and scientific understanding disguised as simple daily ritual.
+                </p>
+                
+                <div class="highlight-box">
+                    <h3>Research Focus Areas</h3>
+                    <ul class="highlight-list">
+                        <li>Mathematical principles and geometric patterns in traditional designs</li>
+                        <li>Cultural symbolism and spiritual significance in daily practice</li>
+                        <li>Evolution of Kolam art through generations and regional variations</li>
+                        <li>Contemporary interpretations and preservation efforts</li>
+                        <li>Connection between art, mathematics, and Tamil cultural identity</li>
+                        <li>Women's role in preserving and transmitting mathematical knowledge</li>
+                        <li>Environmental and ecological aspects of traditional materials</li>
+                        <li>Digital documentation and pattern analysis techniques</li>
+                    </ul>
+                </div>
+
+                <div class="highlight-box" style="background: linear-gradient(135deg, #fff3e0 0%, #f3e5f5 100%);">
+                    <h3>Cultural Significance</h3>
+                    <ul class="highlight-list">
+                        <li>Serves as a medium for meditation and mindfulness practice</li>
+                        <li>Facilitates mathematical thinking through geometric patterns</li>
+                        <li>Strengthens community bonding among women and families</li>
+                        <li>Teaches lessons about impermanence and renewal through daily recreation</li>
+                        <li>Embodies the principle of 'ahimsa' (non-violence) by feeding small creatures</li>
+                        <li>Preserves ancient knowledge systems passed down through generations</li>
+                        <li>Connects practitioners with divine feminine energy and spiritual traditions</li>
+                        <li>Acts as a welcoming symbol for guests and deities at home entrances</li>
+                        <li>Maintains cultural identity in rapidly urbanizing environments</li>
+                        <li>Demonstrates the intersection of art, science, and spirituality</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="gallery-section">
+                <h2 class="section-title">Kolam Art Gallery</h2>
+                <p class="section-subtitle">
+                    Explore the beauty and complexity of traditional Kolam patterns that showcase the intersection of art, mathematics, and spirituality
+                </p>
+                
+                <div class="gallery">
+                    <div class="gallery-item" onclick="openModal('https://kolamsofindia.com/wp-content/uploads/2018/07/photogrid_1530785095001-e1530871823646.jpg')">
+                        <img src="https://kolamsofindia.com/wp-content/uploads/2018/07/photogrid_1530785095001-e1530871823646.jpg" alt="Chikku Kolam or Sikku Kolam" loading="lazy">
+                        <div class="gallery-overlay">
+                            <h4>Chikku Kolam or Sikku Kolam</h4>
+                            <p>Intricate patterns with unbroken, interweaving loops around a grid of dots. These complex designs demonstrate the mathematical beauty of continuous curves that never intersect, creating mesmerizing geometric compositions that symbolize life's interconnectedness.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item" onclick="openModal('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiQZeCYS2-25omh9rvtOx0FCswKpeTLkMTOw&s')">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiQZeCYS2-25omh9rvtOx0FCswKpeTLkMTOw&s" alt="Pulli Kolam" loading="lazy">
+                        <div class="gallery-overlay">
+                            <h4>Pulli Kolam</h4>
+                            <p>A general category where lines connect the dots. This fundamental form of Kolam art showcases how simple dots can be transformed into elaborate patterns through skilled line work, representing the basic building blocks of Tamil geometric art.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item" onclick="openModal('https://i.ytimg.com/vi/hOIsxn96uho/maxresdefault.jpg')">
+                        <img src="https://i.ytimg.com/vi/hOIsxn96uho/maxresdefault.jpg" alt="Padi Kolam" loading="lazy">
+                        <div class="gallery-overlay">
+                            <h4>Padi Kolam</h4>
+                            <p>Symmetrical, repetitive geometric patterns made with parallel lines, often square-based. These designs emphasize structural harmony and mathematical precision, creating visually striking compositions through the repetition of geometric elements.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item" onclick="openModal('https://i.pinimg.com/736x/0a/af/a7/0aafa7ba67c31dbb1e1c7b6e1471d2c2.jpg')">
+                        <img src="https://i.pinimg.com/736x/0a/af/a7/0aafa7ba67c31dbb1e1c7b6e1471d2c2.jpg" alt="Kambi Kolam" loading="lazy">
+                        <div class="gallery-overlay">
+                            <h4>Kambi Kolam</h4>
+                            <p>Designs drawn entirely with straight or curved lines without a dot grid. This free-flowing style allows for more artistic expression while maintaining the essential spiritual and aesthetic principles of traditional Kolam art.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item" onclick="openModal('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Traditional_kolam.jpg/1200px-Traditional_kolam.jpg')">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Traditional_kolam.jpg/1200px-Traditional_kolam.jpg" alt="Traditional Kolam Pattern" loading="lazy">
+                        <div class="gallery-overlay">
+                            <h4>Authentic Traditional Kolam</h4>
+                            <p>A beautiful example of traditional Kolam art featuring intricate geometric patterns drawn with rice flour. This design showcases the classic dot-matrix technique where flowing lines connect dots to create symmetrical, closed-loop patterns that represent the cyclical nature of life and cosmic order.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item" onclick="openModal('https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&h=400&fit=crop&crop=center')">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhhJ0yV9UGDlK8L0kVmKtUdADuTXDC__S0Z3-BQrmMtMhA0nn4f98seU8ATDqnAJdpZZ3-BspsU_imW4afex_0ybO3IrjdyzMz4FMaJJscrrcnsUFsyZyi0eqyx8_diahSZ9hPD7XYad_w/s1600/dec10out.jpg" alt="Traditional Geometric Kolam Pattern" loading="lazy">
+                        <div class="gallery-overlay">
+                            <h4>Geometric Kolam</h4>
+                            <p>This classic dot-grid pattern demonstrates the fundamental mathematical principles of Kolam art. Created using a 7x7 dot matrix, the flowing lines connect each dot while forming perfect symmetrical loops, showcasing how ancient Tamil women intuitively understood complex topological concepts.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item" onclick="openModal('https://images.unsplash.com/photo-1594736797933-d0fce4799c8e?w=600&h=400&fit=crop&crop=center')">
+                        <img src="https://i.pinimg.com/564x/48/56/bb/4856bba10b3a0243a32ad7e3b07392bf.jpg" alt="Intricate Floral Kolam Design" loading="lazy">
+                        <div class="gallery-overlay">
+                            <h4>Lotus Mandala Kolam</h4>
+                            <p>This elaborate floral design represents the sacred lotus, symbolizing purity and spiritual awakening in Tamil culture. The eight-fold symmetry and fractal-like petals demonstrate advanced geometric understanding, while the concentric circles represent the cosmic order and cycles of creation.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item" onclick="openModal('https://images.unsplash.com/photo-1571115764595-644a1f56a55c?w=600&h=400&fit=crop&crop=center')">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjYEuzV9P1kVn0JGM-D7SgmmsVvKZbcVtUSFAPhHWr_p2EX9kR5S_TcBI92DJ_ESWLrhM6MJUJROQJTuio0xBqS5VWdbFCl3U69NBXBo7xt_00higDYSojM1LL8JyFdJQGlwCGIWGbxtNQ/s640/24a.jpg" alt="Festival Kolam Creation" loading="lazy">
+                        <div class="gallery-overlay">
+                            <h4>Margazhi Festival Kolam</h4>
+                            <p>Created during the auspicious month of Margazhi (December-January), this large-scale kolam features intricate borders and multiple geometric sections. The design incorporates traditional motifs like the 'sikku' (knot) pattern, which symbolizes the interconnectedness of all life and the eternal flow of time.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item" onclick="openModal('https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=600&h=400&fit=crop&crop=center')">
+                        <img src="https://www.shutterstock.com/image-vector/big-kolam-borders-15-dots-600nw-2305331147.jpg" alt="Contemporary Kolam Interpretation" loading="lazy">
+                        <div class="gallery-overlay">
+                            <h4>Contemporary Urban Kolam</h4>
+                            <p>A modern interpretation that adapts traditional patterns for contemporary urban spaces. This design maintains the essential dot-grid foundation while incorporating simplified forms that can be quickly created in busy city life, showing how ancient traditions evolve to meet modern needs while preserving core principles.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item" onclick="openModal('https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&h=400&fit=crop&crop=center')">
+                        <img src="https://i.pinimg.com/236x/63/a1/b8/63a1b8c3c6868990702b8431651a1e49.jpg" alt="Sacred Geometry Kolam" loading="lazy">
+                        <div class="gallery-overlay">
+                            <h4>Chakkara Pongal Kolam</h4>
+                            <p>This sacred geometry pattern is traditionally drawn during Pongal celebrations. The hexagonal structure with interlocking triangles represents the harmony between Shiva and Shakti (masculine and feminine energies). The mathematical precision required demonstrates how spiritual concepts were encoded in geometric form.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item" onclick="openModal('https://images.unsplash.com/photo-1594736797933-d0fce4799c8e?w=600&h=400&fit=crop&crop=center')">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSa55ijBUz3tFBAnil1JN4haiHyVHaneuoTug&s" alt="Traditional Threshold Art" loading="lazy">
+                        <div class="gallery-overlay">
+                            <h4>Daily Threshold Kolam</h4>
+                            <p>A simple yet elegant daily kolam created at the home entrance each morning. This design follows the 'kambi' (line) style without dots, where continuous curves create closed patterns. The rice powder used not only creates beauty but also serves as food for ants and small birds, embodying the principle of 'ahimsa' (non-violence).</p>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item" onclick="openModal('https://images.unsplash.com/photo-1594736797933-d0fce4799c8e?w=600&h=400&fit=crop&crop=center')">
+                        <img src="https://th.bing.com/th/id/R.35469b1be064d51be98829b95db65d47?rik=Qy3kTzIaAYhOrQ&riu=http%3a%2f%2fillustrationconcentration.files.wordpress.com%2f2011%2f09%2fkolam.jpg&ehk=mKWvWVnQRQUMB53fGlj2VsCeIzWM0qhz436Xz6%2fv15E%3d&risl=&pid=ImgRaw&r=0" alt="Many More Designs Availabe" loading="lazy">
+                        <div class="gallery-overlay">
+                            <h4>Numerous Other Designs</h4>
+                            <p>Artists weave their innovation into each day, turning imagination into something new. </p>
+                        </div>
+                </div>
+            </section>
+        </div>
+
+        <footer class="footer">
+            <p>Traditional Kolam Art • Tamil Cultural Heritage • Sacred Geometry Research</p>
+        </footer>
+    </div>
+
+    <!-- Modal for image gallery -->
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <div class="modal-close" onclick="closeModal()">&times;</div>
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <img id="modalImage" src="" alt="Kolam Pattern" />
+        </div>
+    </div>
+
+    <script>
+        // Image modal functionality
+        function openModal(imageSrc) {
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            modal.style.display = 'block';
+            modalImage.src = imageSrc;
+            document.body.style.overflow = 'hidden';
+            
+            /* Prevent modal from closing when clicking on image*/
+            modalImage.onclick = function(e) {
+                e.stopPropagation();
+            };
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        /* Smooth loading animation for gallery images*/
+        document.addEventListener('DOMContentLoaded', function() {
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            
+            /* Add staggered animation to gallery items */
+            galleryItems.forEach((item, index) => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateY(20px)';
+                item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                
+                setTimeout(() => {
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+
+            /* Lazy loading for images*/
+            const images = document.querySelectorAll('img[loading="lazy"]');
+            images.forEach(img => {
+                img.addEventListener('load', function() {
+                    this.style.opacity = '1';
+                });
+                img.style.opacity = '0';
+                img.style.transition = 'opacity 0.3s ease';
+            });
+        });
+
+        /* Add smooth scrolling for better UX */
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const header = document.querySelector('.header');
+            if (header) {
+                header.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+
+        /*Touch gesture support for mobile*/
+        let touchStartY = 0;
+        let touchEndY = 0;
+
+        document.addEventListener('touchstart', function(e) {
+            touchStartY = e.changedTouches[0].screenY;
+        });
+
+        document.addEventListener('touchend', function(e) {
+            touchEndY = e.changedTouches[0].screenY;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const modal = document.getElementById('imageModal');
+            if (modal.style.display === 'block') {
+                if (touchEndY - touchStartY > 100) {
+                    closeModal();
+                }
+            }
+        }
+
+        /*Prevent context menu on gallery images for better UX*/
+        document.querySelectorAll('.gallery-item img').forEach(img => {
+            img.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+            });
+        });
+    </script>
+</body>
+</html>

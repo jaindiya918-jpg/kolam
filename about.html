@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KaleidosCode - About Our Team</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            min-height: 95vh;
+            margin-top: 2.5vh;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 40px 0;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        .header:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+            background-position: 100% 50%;
+        }
+        }
+
+        .logo {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            color: white;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .team-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+        .team-card img {
+            width: 150px; /* Adjust size to match your card width */
+            height: 150px; /* Same as width for a perfect circle */
+            border-radius: 50%; /* Makes the image circular */
+            object-fit: cover; /* Crops and fills the circle nicely */
+            display: block;
+            margin: 0 auto; /* Centers image inside the card */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Optional: adds a soft shadow */
+        }
+
+
+        .team-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff6b6b, #ee5a24, #764ba2, #667eea);
+            background-size: 300% 300%;
+            animation: gradientShift 3s ease infinite;
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+        }
+
+        .member-avatar {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .team-card:hover .member-avatar {
+            transform: rotate(360deg);
+        }
+
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            display: block;
+            margin: 0 auto 20px;
+        }
+
+        .profile-pic img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* ensures full coverage */
+            object-position: center top; /* <--- THIS is key to center the face */
+        }
+
+        .member-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .member-role {
+            font-size: 1rem;
+            color: #7f8c8d;
+            margin-bottom: 15px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .member-bio {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #5a6c7d;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .member-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .skill-tag {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            box-shadow: 0 2px 10px rgba(102, 126, 234, 0.3);
+            transition: transform 0.2s ease;
+        }
+
+        .skill-tag:hover {
+            transform: scale(1.05);
+        }
+
+        .stats-section {
+            background: linear-gradient(135deg, #FFE5E0, #FFD6D6);
+            color: #2C2C2C;
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 60px 0;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            color: #333;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ff6b6b;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .team-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .logo {
+                font-size: 2.5rem;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="logo">KaleidosCode</h1>
+            <p class="tagline">We're a passionate team of developers, designers, and innovators who transform ideas into beautiful, functional digital experiences. Like a kaleidoscope, we bring together diverse perspectives to create something extraordinary.</p>
+        </div>
+
+        <div class="stats-section" style="margin-bottom: 40px;">
+            <h2 class="section-title">Our Vision</h2>
+            <div style="font-size:1.15rem; color:#444; max-width:700px; margin:0 auto; line-height:1.7; text-align:left;">
+                <p>We believe Kolam designs are more than tradition — they are therapy.<br>
+                Our mission is to use the mathematical beauty of Kolams to promote:</p>
+                <ul style="margin: 1em 0 1em 2em;">
+                    <li><strong>Mental Calmness:</strong> Soothing, repetitive patterns for relaxation and mindfulness.</li>
+                    <li><strong>Cognitive Growth:</strong> A playful way to enhance focus and problem-solving skills, helpful for ADHD and anxiety management.</li>
+                    <li><strong>Creative Inspiration:</strong> Authentic pattern resources for architects, textile designers, and digital artists.</li>
+                </ul>
+                <p>We want Kolam art to be a bridge between ancient wisdom and modern creativity, helping people find peace, focus, and inspiration.</p>
+            </div>
+        </div>
+
+        <h2 class="section-title" style="text-align: center; margin-bottom: 40px;">Meet Our Team</h2>
+        
+        <div class="team-grid">
+            <div class="team-card">
+                <img src="images/WhatsApp Image 2025-09-16 at 22.02.41_e72ab314.jpg" alt="Ghanakshi Sharma" class="member-photo" />
+                <h3 class="member-name">Ghanakshi Sharma</h3>
+                <p class="member-role">Team Lead | Web Designer</p>
+                <p class="member-bio">a 2nd year EC student and dynamic team leader handling content creation, research, frontend development, and presentations. designs impactful PPTs and websites while ensuring seamless user experiences. Passionate about technology, creativity, and problem-solving.</p>
+                <div class="member-skills">
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">HTML/CSS</span>
+                    <span class="skill-tag">Content writing</span>
+                    <span class="skill-tag">Documentation</span>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <img src="images/WhatsApp Image 2025-09-08 at 22.00.16_062ef9c9.jpg" alt="Priyanshi Juyal" class="member-photo" />
+                <h3 class="member-name">Priyanshi Juyal</h3>
+                <p class="member-role">Full stack Web Dev/Learner</p>
+                <p class="member-bio">Versatile 2nd year CS student contributing to both frontend and backend development. Assists across different technical areas while focusing on debugging, testing, and code optimization.</p>
+                <div class="member-skills">
+                    <span class="skill-tag">UI/UX Designer</span>
+                    <span class="skill-tag">Java script</span>
+                    <span class="skill-tag">Node.js</span>
+                    <span class="skill-tag">React(Learning)</span>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="profile-pic"><img src="images/WhatsApp Image 2025-09-08 at 21.55.03_c780a9a7.jpg" alt="Diya Jain" class="member-photo" /></div>
+                <h3 class="member-name">Diya Jain</h3>
+                <p class="member-role">Backend Developer/Learner</p>
+                <p class="member-bio">2nd year CS student handling server-side development and database management. Ensures robust backend functionality while supporting the team's technical architecture and data flow.</p>
+                <div class="member-skills">
+                    <span class="skill-tag">MySQL</span>
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">C++</span>
+                    <span class="skill-tag">Quick Learner</span>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <img src="images/WhatsApp Image 2025-09-08 at 21.53.26_75b33512.jpg" alt="Navya Singh" class="member-photo" />
+                <h3 class="member-name">Navya Singh</h3>
+                <p class="member-role">Frontend Dev/Learner | Research specialist</p>
+                <p class="member-bio">2nd year CS-AI student diving deep into web development! Currently mastering React and excited to build user-friendly interfaces for our first hackathon project.</p>
+                <div class="member-skills">
+                    <span class="skill-tag">HTML</span>
+                    <span class="skill-tag">CSS</span>
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">API basics</span>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <img src="images/WhatsApp Image 2025-06-28 at 19.34.11_57fa7d65.jpg" alt="Navya Aggarwal" class="member-photo" />
+                <h3 class="member-name">Navya Aggarwal</h3>
+                <p class="member-role">Computer Vision Developer/Learner</p>
+                <p class="member-bio">2nd year student exploring the fascinating world of computer vision and machine learning. Combines technical programming skills with creative design abilities while learning to build intelligent visual systems.</p>
+                <div class="member-skills">
+                    <span class="skill-tag">Canva</span>
+                    <span class="skill-tag">C</span>
+                    <span class="skill-tag">HTML</span>
+                    <span class="skill-tag">API(Learning)</span>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <img src="images/WhatsApp Image 2025-09-08 at 21.51.42_aef0ab65.jpg" alt="Vaishnavi Saxena" class="member-photo" />
+                <h3 class="member-name">Vaishnavi Saxena</h3>
+                <p class="member-role">Web Dev/Learner | Problem solver</p>
+                <p class="member-bio">2nd year CS student with a unique blend of frontend development and database expertise. Excels at solving complex technical challenges and bridging the gap between user interface and data management. His analytical mindset makes him invaluable for debugging and optimization.</p>
+                <div class="member-skills">
+                    <span class="skill-tag">C++</span>
+                    <span class="skill-tag">Frontend</span>
+                    <span class="skill-tag">Problem Solving</span>
+                    <span class="skill-tag">MySQL</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

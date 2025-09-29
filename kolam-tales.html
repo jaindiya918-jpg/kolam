@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kolam Stories - Traditional Wisdom in Art</title>
+<style>
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+body {
+background-color: #f8f5f2;
+color: #333;
+line-height: 1.6;
+}
+.container {
+max-width: 1200px;
+margin: 0 auto;
+padding: 20px;
+}
+header {
+text-align: center;
+padding: 40px 0;
+background: linear-gradient(135deg, #8e2de2, #4a00e0);
+color: white;
+margin-bottom: 40px;
+border-radius: 10px;
+}
+header h1 {
+font-size: 2.8rem;
+margin-bottom: 10px;
+}
+header p {
+font-size: 1.2rem;
+max-width: 800px;
+margin: 0 auto;
+}
+.kolam-grid {
+display: grid;
+
+grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+gap: 30px;
+}
+.kolam-card {
+background: white;
+border-radius: 15px;
+overflow: hidden;
+box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.kolam-card:hover {
+transform: translateY(-10px);
+box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+.kolam-image {
+height: 200px;
+background-size: cover;
+background-position: center;
+position: relative;
+}
+.kolam-title {
+position: absolute;
+bottom: 0;
+left: 0;
+right: 0;
+background: rgba(0, 0, 0, 0.7);
+color: white;
+padding: 10px 15px;
+font-size: 1.2rem;
+font-weight: bold;
+}
+.kolam-content {
+padding: 20px;
+}
+.language-selector {
+display: flex;
+margin-bottom: 15px;
+border-radius: 5px;
+overflow: hidden;
+border: 1px solid #ddd;
+}
+
+.lang-btn {
+flex: 1;
+padding: 8px 12px;
+background: #f0f0f0;
+border: none;
+cursor: pointer;
+transition: background 0.3s;
+}
+.lang-btn.active {
+background: #4a00e0;
+color: white;
+}
+.story-container {
+max-height: 250px;
+overflow-y: auto;
+padding: 10px 0;
+margin-bottom: 15px;
+}
+.story {
+display: none;
+}
+.story.active {
+display: block;
+}
+.story h3 {
+color: #4a00e0;
+margin-bottom: 10px;
+}
+.story p {
+margin-bottom: 15px;
+text-align: justify;
+}
+.moral {
+font-style: italic;
+background: #f0f0f0;
+padding: 10px;
+border-radius: 5px;
+margin-top: 15px;
+}
+.audio-controls {
+
+display: flex;
+gap: 10px;
+}
+.audio-btn {
+flex: 1;
+padding: 10px;
+background: #8e2de2;
+color: white;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 5px;
+transition: background 0.3s;
+}
+.audio-btn:hover {
+background: #7a1fd1;
+}
+.audio-btn.playing {
+background: #e74c3c;
+}
+.audio-btn.paused {
+background: #f39c12;
+}
+.audio-btn.error {
+background: #95a5a6;
+cursor: not-allowed;
+}
+.audio-message {
+font-size: 0.8rem;
+color: #e74c3c;
+text-align: center;
+margin-top: 5px;
+height: 20px;
+}
+footer {
+text-align: center;
+padding: 30px 0;
+margin-top: 50px;
+
+color: #666;
+font-size: 0.9rem;
+}
+/* Responsive adjustments */
+@media (max-width: 768px) {
+header h1 {
+font-size: 2.2rem;
+}
+.kolam-grid {
+grid-template-columns: 1fr;
+}
+}
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+<h1>Kolam Stories</h1>
+<p>Traditional Wisdom in Art - Explore the beauty of kolam designs through ancient
+stories</p>
+</header>
+<div class="kolam-grid">
+<!-- Kolam 1: The Lotus of Wisdom -->
+<div class="kolam-card">
+<div class="kolam-image" style="background-image:
+url('https://cfw51.rabbitloader.xyz/eyJjIjp0cnVlLCJoIjoibXltYW5kYXAuaW4iLCJ2IjozNTA3MDAwMTg5LCJyIjoxLCJpIjoiNDE2MzFhZWQtYjU1MC00NTYxLTc1NWEtOWU5NDE5ZDZmOTAwIn0/wp-content/uploads/2022/08/Lotus-Kolam-Rangoli-Designs.jpg');">
+
+<div class="kolam-title">The Lotus of Wisdom</div>
+</div>
+<div class="kolam-content">
+<div class="language-selector">
+<button class="lang-btn active" data-lang="en"
+
+data-story="lotus">English</button>
+
+<button class="lang-btn" data-lang="hi" data-story="lotus">हि दं ी</button>
+</div>
+<div class="story-container">
+<div class="story active" id="lotus-en">
+<h3>The Lotus of Wisdom</h3>
+<p>In the ancient kingdom of Vidyanagar, there lived a wise king named
+Aditya who ruled with justice and compassion. Every morning, he would draw a kolam at the
+palace entrance - a lotus surrounded by intricate geometric patterns. This kolam was no
+ordinary design; it was said to hold the key to the kingdom's prosperity.</p>
+
+<p>One day, a young girl named Lata came to the palace. She was the
+daughter of a poor farmer but possessed extraordinary artistic talent. When she saw the
+king's kolam, she immediately understood its meaning. The lotus represented wisdom rising
+
+above the muddy waters of ignorance, while the geometric patterns symbolized life's
+challenges.</p>
+
+<p>Lata approached the king and said, "Your Majesty, your kolam tells the
+story of how wisdom can be achieved by overcoming life's obstacles." Impressed, the king
+invited her to explain further.</p>
+
+<p>She told him: "Long ago, in a dense forest, there lived a community of
+frogs. They were happy but worried about their pond drying up each summer. One day, an
+old turtle visited and spoke of a magical lotus that bloomed in the forest's heart. 'Whoever
+eats its petals will gain wisdom to solve any problem,' he said.</p>
+
+<p>The frogs sent their bravest member, Frogi, on a journey to find the
+lotus. He faced many challenges: crossing a river full of crocodiles, climbing a steep
+mountain, and navigating through a dark cave. At each step, he used his wits to overcome
+the obstacles.</p>
+
+<p>Finally, after many days, Frogi found the lotus blooming in a
+crystal-clear pond. He took a petal and returned to his community. With the wisdom gained,
+he devised a plan to deepen their pond and connect it to a nearby stream, ensuring water
+throughout the year.</p>
+
+<p>The frogs lived happily ever after, and Frogi became their respected
+
+leader."</p>
+
+<p>King Aditya realized his kolam reflected this story. He appointed Lata
+as the royal kolam artist. From that day on, her kolams guided the king's rule, and the
+kingdom prospered.</p>
+
+<div class="moral">True wisdom is attained by facing and overcoming life's
+
+challenges with courage and intelligence.</div>
+
+</div>
+<div class="story" id="lotus-hi">
+<h3>ज्ञान का कमल</h3>
+<p>प्राचीन वि द्यानगर राज्य मेंआदि त्य नामक एक बद्ुधि मान राजा रहतेथे, जो न्याय
+और करुणा सेशासन करतेथे। हर सबु ह, वेमहल के प्रवेश द्वार पर एक कोलम बनातेथे- एक कमल जो
+जटि ल ज्यामि तीय पटैर्न सेघि रा होता था। यह कोलम कोई साधारण डि जाइन नहीं था; यह कहा जाता था कि
+इसमेंराज्य की समद्ृधि की कंुजी छि पी है।</p>
+
+<p>एक दि न, लता नाम की एक यवु ा लड़की महल आई। वह एक गरीब कि सान की बेटी
+थी लेकि न उसमेंअसाधारण कलात्मक प्रति भा थी। जब उसनेराजा का कोलम देखा, तो उसनेतरुंत इसका अर्थ
+समझ लि या। कमल अज्ञानता के कीचड़ सेऊपर उठनेवालेज्ञान का प्रतीक था, जबकि ज्यामि तीय पटैर्न
+जीवन की चनु ौति यों का प्रतीक थे।</p>
+
+<p>लता राजा के पास गई और कहा, "महाराज, आपका कोलम यह कहानी कहता हैकि
+ज्ञान कैसेजीवन की बाधाओंको दरू करके प्राप्त कि या जा सकता है।" प्रभावि त होकर, राजा नेउसेआगेबताने
+के लि ए आमत्रिं त्रित कि या।</p>
+
+<p>उसनेउन्हेंबताया: "लबं ेसमय पहले, एक घनेजंगल में, मेढ़कों का एक समदुाय
+रहता था। वेखशु थेलेकि न गर्मि यर्मि ों मेंउनके तालाब के सखू नेके बारेमेंचि तिंतित रहतेथे। एक दि न, एक बढ़ू ा
+कछुआ आया और जंगल के दि ल मेंखि लनेवालेएक जादईु कमल के बारेमेंबताया। 'जो कोई भी इसकी
+पखं ड़िुड़ियाँखाएगा, उसेकि सी भी समस्या को हल करनेका ज्ञान प्राप्त होगा,' उसनेकहा।</p>
+
+<p>मेढ़कों नेअपनेसबसेबहादरु सदस्य, फ्रोगी को कमल खोजनेके लि ए भेजा। उसने
+कई चनु ौति यों का सामना कि या: मगरमच्छों सेभरी नदी पार करना, एक खड़ी पहाड़ी पर चढ़ना, और एक
+अधं ेरी गफु ा सेगजु रना। हर कदम पर, उसनेबाधाओंको दरू करनेके लि ए अपनी बद्ुधि का उपयोग
+कि या।</p>
+
+<p>आखि रकार, कई दि नों के बाद, फ्रोगी को एक क्रि स्टल-स्पष्ट तालाब मेंखि लता हुआ
+कमल मि ला। उसनेएक पखं ड़ुी ली और अपनेसमदुाय मेंलौट आया। प्राप्त ज्ञान के साथ, उसनेअपनेतालाब
+
+को गहरा करनेऔर इसेएक नि कटवर्ती धारा सेजोड़नेकी योजना बनाई, जि ससेपरूेवर्ष पानी की आपर्तिूर्ति
+सनिुनिश्चि त हुई।</p>
+
+<p>मेढ़क हमेशा खशु ी सेरहे, और फ्रोगी उनका सम्मानि त नेता बन गया।"</p>
+<p>राजा आदि त्य नेमहससू कि या कि उनका कोलम इस कहानी को प्रति बि बिंबित करता
+है। उन्होंनेलता को राजकीय कोलम कलाकार नि यक्ुत कि या। उस दि न से, उसके कोलम राजा के शासन का
+मार्गदर्ग र्शनर्श करतेरहे, और राज्य समद्ृ ध हुआ।</p>
+
+<div class="moral">सच्चा ज्ञान साहस और बद्ुधि के साथ जीवन की चनु ौति यों का
+
+सामना करके और उन पर वि जय पाकर प्राप्त कि या जाता है।</div>
+
+</div>
+</div>
+<div class="audio-controls">
+<button class="audio-btn" data-story="lotus" data-lang="en"
+data-play-text="🔊 Listen in English" data-pause-text="⏸ Pause">
+
+🔊 Listen in English
+</button>
+<button class="audio-btn" data-story="lotus" data-lang="hi"
+
+data-play-text="🔊 हि दं ी मेंसनु ें" data-pause-text="⏸ रोकें">
+
+🔊 हि दं ी मेंसनु ें
+</button>
+</div>
+<div class="audio-message"></div>
+</div>
+</div>
+<!-- Kolam 2: The Peacock's Pride -->
+<div class="kolam-card">
+<div class="kolam-image" style="background-image:
+url('https://i.pinimg.com/736x/a9/a0/f9/a9a0f9318edef3914d1b80f65cca6be4.jpg');">
+
+<div class="kolam-title">The Peacock's Pride</div>
+</div>
+<div class="kolam-content">
+<div class="language-selector">
+<button class="lang-btn active" data-lang="en"
+
+data-story="peacock">English</button>
+
+<button class="lang-btn" data-lang="hi" data-story="peacock">हि दं ी</button>
+</div>
+<div class="story-container">
+<div class="story active" id="peacock-en">
+<h3>The Peacock's Pride</h3>
+<p>In the lush gardens of the royal palace, there lived a magnificent
+peacock named Mayur. His feathers were the most beautiful in all the land, shimmering with
+colors of emerald, sapphire, and gold. Mayur knew of his beauty and took great pride in it,
+spending hours admiring his reflection in the palace ponds.</p>
+
+<p>Every morning, he would spread his feathers and dance, drawing
+crowds of admirers. "None can compare to my beauty," he would boast to the other birds.
+The sparrows, parrots, and mynahs would listen politely, but they knew Mayur's pride was
+growing too large.</p>
+
+<p>One day, as Mayur was preening by the pond, he noticed a small
+sparrow struggling to free herself from a hunter's net. The sparrow chirped desperately, but
+no one came to her aid. Mayur watched for a moment, thinking, "Why should I risk my
+beautiful feathers for a plain sparrow?"</p>
+
+<p>But then he remembered how the sparrow had always been kind to
+him, sharing seeds and singing cheerful songs. With a sigh, Mayur approached the net.
+Using his strong beak and claws, he carefully worked at the knots, ignoring the risk to his
+precious feathers.</p>
+
+<p>After much effort, the sparrow was freed. She bowed gratefully to
+Mayur. "Thank you, noble peacock. You have shown that true beauty lies not in appearance
+but in the heart."</p>
+
+<p>From that day forward, Mayur still admired his feathers, but he no
+longer boasted. Instead, he used his beauty to bring joy to others, dancing for children and
+cheering the sick. The other birds grew to respect him not for his appearance, but for his
+kindness.</p>
+
+<div class="moral">True beauty lies in humility and kindness, not just in
+
+appearance.</div>
+</div>
+<div class="story" id="peacock-hi">
+<h3>मोर का गर्व</h3>
+<p>राजमहल के शानदार उद्यानों मेंमयरू नामक एक भव्य मोर रहता था। उसके पखं
+परूी भमिूमि मेंसबसेसदंुर थे, जो पन्ना, नीलम और सोनेके रंगों सेचमक रहेथे। मयरू को अपनी सदंुरता का
+पता था और उस पर गर्व करता था, वह घटं ों महल के तालाबों मेंअपनेप्रति बि बं को नि हारता रहता था।</p>
+<p>हर सबु ह, वह अपनेपखं फैलाकर नाचता था, और प्रशंसकों की भीड़ को आकर्षि तर्षि
+करता था। "मेरी सदंुरता की तलु ना कोई नहींकर सकता," वह दसू रेपक्षि यों सेडींग मारता था। गौरैया, तोते
+और मनै ा वि नम्रता सेसनु तेथे, लेकि न वेजानतेथेकि मयरू का गर्व बहुत बढ़ रहा है।</p>
+
+<p>एक दि न, जब मयरू तालाब के कि नारेअपनेपखं ों को सवं ार रहा था, उसनेएक छोटी
+गौरैया को शि कारी के जाल सेछूटनेके लि ए सघं र्ष करतेहुए देखा। गौरैया नि राशा सेचींची, लेकि न कोई उसकी
+मदद करनेनहींआया। मयरू नेएक पल तक देखा, सोचतेहुए, "मैंएक सादी गौरैया के लि ए अपनेसदंुर पखं ों
+को खतरेमेंक्यों डाल?ंू"</p>
+
+<p>लेकि न फि र उसनेयाद कि या कि गौरैया हमेशा उसके प्रति दयालुरही थी, बीज साझा
+करती थी और खशु नमु ा गीत गाती थी। एक लबं ी सांस लेतेहुए, मयरू जाल के पास गया। अपनी मजबतू चोंच
+और पजं ों का उपयोग करके, उसनेसावधानी सेगांठों पर काम कि या, अपनेकीमती पखं ों के जोखि म को
+नजरअदं ाज कर दि या।</p>
+
+<p>बहुत प्रयास के बाद, गौरैया आजाद हो गई। उसनेआभारपर्वूकर्व मयरू को प्रणाम
+कि या। "धन्यवाद, नेक मोर। आपनेदि खाया हैकि सच्ची सदंुरता दि खावेमेंनहीं, बल्कि दि ल मेंनि हि त
+है।"</p>
+
+<p>उस दि न से, मयरू अभी भी अपनेपखं ों की प्रशंसा करता था, लेकि न वह अब डींग नहीं
+मारता था। इसके बजाय, वह दसू रों को खशु ी देनेके लि ए अपनी सदंुरता का उपयोग करता था, बच्चों के लि ए
+नाचता था और बीमारों का मनोरंजन करता था। दसू रेपक्षी उसकी उपस्थि ति के लि ए नहीं, बल्कि उसकी
+दयालतु ा के लि ए उसका सम्मान करनेलगे।</p>
+
+<div class="moral">सच्ची सदंुरता वि नम्रता और दयालतु ा मेंनि हि त है, केवल दि खावे
+
+मेंनहीं।</div>
+</div>
+</div>
+<div class="audio-controls">
+<button class="audio-btn" data-story="peacock" data-lang="en"
+
+data-play-text="🔊 Listen in English" data-pause-text="⏸ Pause">
+
+🔊 Listen in English
+</button>
+<button class="audio-btn" data-story="peacock" data-lang="hi"
+
+data-play-text="🔊 हि दं ी मेंसनु ें" data-pause-text="⏸ रोकें">
+
+🔊 हि दं ी मेंसनु ें
+</button>
+</div>
+<div class="audio-message"></div>
+</div>
+</div>
+<!-- Kolam 3: The Elephant's Path -->
+<div class="kolam-card">
+<div class="kolam-image" style="background-image:
+url('https://i.pinimg.com/1200x/5d/06/7c/5d067cc068eaf6bbb92a39aa76619749.jpg');">
+
+<div class="kolam-title">The Elephant's Path</div>
+</div>
+<div class="kolam-content">
+<div class="language-selector">
+<button class="lang-btn active" data-lang="en"
+
+data-story="elephant">English</button>
+
+<button class="lang-btn" data-lang="hi" data-story="elephant">हि दं ी</button>
+</div>
+<div class="story-container">
+<div class="story active" id="elephant-en">
+<h3>The Elephant's Path</h3>
+<p>In the heart of the dense jungle, there lived a herd of elephants led by
+the wise old Gajendra. For many years, Gajendra had guided his herd through changing
+seasons, always finding water and food even in the driest of times.</p>
+
+<p>One year, a severe drought struck the land. Rivers dried up, vegetation
+withered, and the animals grew desperate. The younger elephants suggested searching for
+new territories, but Gajendra remembered stories from his youth about a hidden oasis that
+never dried up.</p>
+
+<p>"I will lead us to the ancient water source," Gajendra announced. "But
+
+the path is long and dangerous. We must trust in our strength and unity."</p>
+
+<p>The journey was arduous. They crossed scorching plains, climbed
+steep mountains, and navigated through treacherous ravines. Many times, the younger
+elephants wanted to turn back, but Gajendra encouraged them with stories of the cool
+waters that awaited.</p>
+
+<p>After weeks of travel, just when the herd was about to give up hope,
+Gajendra recognized a landmark - a unique rock formation shaped like an elephant's head.
+"We are close!" he trumpeted.</p>
+
+<p>Following his memory, Gajendra led them through a narrow canyon
+and into a hidden valley where a crystal-clear spring bubbled from the earth. The elephants
+rejoiced, drinking their fill and bathing in the life-giving waters.</p>
+
+<p>From that day on, the herd revered Gajendra not just for his strength,
+but for his wisdom and memory. They learned that the path to survival is often found not in
+new directions, but in remembering ancient wisdom.</p>
+
+<div class="moral">Wisdom and experience are our greatest guides in
+
+difficult times.</div>
+</div>
+<div class="story" id="elephant-hi">
+<h3>हाथी का मार्ग<र्ग /h3>
+<p>घनेजंगल के दि ल में, बद्ुधि मान बढ़ूेगजेंद्र के नेतत्ृव मेंहाथि यों का एक झडंु रहता
+था। कई वर्षों तक, गजेंद्र नेबदलतेमौसम मेंअपनेझडंु का मार्गदर्ग र्शनर्श कि या था, हमेशा सखू ेसमय मेंभी पानी
+और भोजन ढूंढता था।</p>
+
+<p>एक साल, भमिूमि पर भीषण सखू ा पड़ा। नदि यांसखू गईं, वनस्पति मरुझा गई, और
+जानवर नि राश हो गए। यवु ा हाथि यों नेनए क्षेत्रों की खोज का सझु ाव दि या, लेकि न गजेंद्र को अपनेयवु ावस्था
+की कहानि यांयाद आईं जो कभी सखू नेवालेछि पेहुए ओएसि स के बारेमेंथीं।</p>
+
+<p>"मैंतम्ुहेंप्राचीन जल स्रोत तक लेजाऊंगा," गजेंद्र नेघोषणा की। "लेकि न रास्ता लबं ा
+
+और खतरनाक है। हमेंअपनी शक्ति और एकता पर वि श्वास करना होगा।"</p>
+
+<p>यात्रा कठि न थी। वेतपतेमदै ानों को पार करतेहुए, खड़ी पहाड़ि यों पर चढ़तेहुए, और
+खतरनाक घाटि यों सेगजु रतेहुए चले। कई बार, यवु ा हाथी वापस जाना चाहतेथे, लेकि न गजेंद्र नेउन्हें
+प्रतीक्षि त ठंडेपानी की कहानि यों सेप्रोत्साहि त कि या।</p>
+
+<p>हफ्तों की यात्रा के बाद, जब झडंु आशा छोड़नेही वाला था, गजेंद्र नेएक स्थल चि न्ह
+पहचाना - एक अनठू ी चट्टान की सरं चना जो हाथी के सि र के आकार की थी। "हम नजदीक हैं!" वह तरुही
+बजाई।</p>
+
+<p>अपनी याददाश्त का पालन करतेहुए, गजेंद्र नेउन्हेंएक सकं ीर्ण घाटी सेहोकर एक
+छि पेहुए घाटी मेंलेगया जहांएक क्रि स्टल-स्पष्ट झरना धरती सेबलु बलु ा कर रहा था। हाथी खशु होकर
+जीवनदायी जल मेंभरपरू पीकर स्नान करनेलगे।</p>
+
+<p>उस दि न से, झडंु नेगजेंद्र का केवल उसकी शक्ति के लि ए ही नहीं, बल्कि उसकी
+बद्ुधि और स्मतिृति के लि ए भी सम्मान कि या। उन्होंनेसीखा कि जीवि त रहनेका रास्ता अक्सर नई दि शाओंमें
+नहीं, बल्कि प्राचीन ज्ञान को याद करनेमेंपाया जाता है।</p>
+
+<div class="moral">कठि न समय मेंबद्ुधि और अनभु व हमारेसबसेबड़ेमार्गदर्ग र्शकर्श
+
+हैं।</div>
+
+</div>
+</div>
+<div class="audio-controls">
+<button class="audio-btn" data-story="elephant" data-lang="en"
+
+data-play-text="🔊 Listen in English" data-pause-text="⏸ Pause">
+
+🔊 Listen in English
+</button>
+<button class="audio-btn" data-story="elephant" data-lang="hi"
+
+data-play-text="🔊 हि दं ी मेंसनु ें" data-pause-text="⏸ रोकें">
+
+🔊 हि दं ी मेंसनु ें
+</button>
+</div>
+<div class="audio-message"></div>
+</div>
+</div>
+<!-- Kolam 4: The Fish of Fortune -->
+<div class="kolam-card">
+<div class="kolam-image" style="background-image:
+url('https://i.pinimg.com/1200x/7a/e4/40/7ae4407ac6bd34f5580203395174108b.jpg');">
+
+<div class="kolam-title">The Fish of Fortune</div>
+
+</div>
+<div class="kolam-content">
+<div class="language-selector">
+<button class="lang-btn active" data-lang="en"
+
+data-story="fish">English</button>
+
+<button class="lang-btn" data-lang="hi" data-story="fish">हि दं ी</button>
+</div>
+<div class="story-container">
+<div class="story active" id="fish-en">
+<h3>The Fish of Fortune</h3>
+<p>In a peaceful village pond lived two golden fish, Meena and Matsya.
+They were inseparable friends, swimming together through the water lilies and reeds. The
+villagers believed these fish brought good fortune to their community, and indeed, the village
+prospered while the fish thrived.</p>
+
+<p>One fateful day, a terrible storm caused the pond to overflow, and the
+two fish were swept away in the rushing waters. Meena was carried east, while Matsya was
+pushed west. Separated for the first time in their lives, they each faced the daunting task of
+finding their way home.</p>
+
+<p>Meena found herself in a small stream that led to a series of
+interconnected ponds. Along the way, she helped other creatures - showing a trapped turtle
+how to escape, guiding lost tadpoles to safety, and sharing food with hungry minnows. Each
+act of kindness seemed to create a ripple effect, making her journey easier.</p>
+<p>Matsya, meanwhile, was carried into a large river filled with dangers.
+He used his wits to avoid predators and navigate strong currents. He too helped others -
+warning fish of approaching danger, helping to clean debris from the water, and leading a
+school of young fish to safer waters.</p>
+
+<p>After many weeks, Meena and Matsya each found their way back to
+the village pond, arriving on the same day. Their reunion brought joy to the entire village.
+The pond seemed to sparkle brighter, and the village's prosperity returned with even greater
+abundance.</p>
+
+<p>The villagers realized that the true fortune of the fish was not just their
+presence, but the kindness and wisdom they shared with others along their journey. The two
+fish had created a network of goodwill that flowed back to their home.</p>
+
+<div class="moral">Unity and perseverance can overcome any obstacle
+
+and restore prosperity.</div>
+</div>
+<div class="story" id="fish-hi">
+<h3>सौभाग्य की मछली</h3>
+<p>एक शांत गाँव के तालाब मेंदो सनु हरी मछलि याँ, मीना और मत्स्य रहती थीं। वे
+अवि भाज्य दोस्त थे, जलकंुभ और घास के बीच सेएक साथ तरैतेथे। ग्रामीणों का वि श्वास था कि येमछलि याँ
+उनके समदुाय के लि ए अच्छा भाग्य लाती हैं, और वास्तव में, गाँव समद्ृ ध हुआ जब मछलि याँ
+फली-फूलीं।</p>
+
+<p>एक दर्भाु र्भाग्यपर्णू र्णदि न, एक भयानक तफू ान के कारण तालाब उफन गया, और दोनों
+मछलि याँतजे ी सेबहतेपानी मेंबह गईं। मीना पर्वू र्वकी ओर बह गई, जबकि मत्स्य पश्चि म की ओर धकेल
+दि या गया। अपनेजीवन मेंपहली बार अलग होकर, उन्होंनेप्रत्येक नेघर वापस जानेका कठि न कार्य
+कि या।</p>
+
+<p>मीना खदु को एक छोटी धारा मेंपाई जो कई तालाबों सेजड़ुी हुई थी। रास्तेमें, उसने
+दसू रेजीवों की मदद की - एक फंसेकछुए को बचनेका तरीका दि खाया, खोए हुए मेंढक के बच्चों को सरुक्षा के
+
+लि ए मार्गदर्ग र्शनर्श कि या, और भखू ी छोटी मछलि यों के साथ भोजन साझा कि या। प्रत्येक दयालतु ा का कार्य एक
+लहर प्रभाव उत्पन्न करता प्रतीत हुआ, जि ससेउसकी यात्रा आसान हो गई।</p>
+
+<p>दसू री ओर, मत्स्य को खतरों सेभरी एक बड़ी नदी मेंलेजाया गया। उसनेशि कारि यों
+सेबचनेऔर तजे धाराओंको नेवि गेट करनेके लि ए अपनी चतरुाई का उपयोग कि या। उसनेभी दसू रों की
+मदद की - आनेवालेखतरेके बारेमेंमछलि यों को चेतावनी दी, पानी सेमलबेको साफ करनेमेंमदद की,
+और यवु ा मछलि यों के एक समहू को अधि क सरुक्षि त पानी मेंलेगया।</p>
+
+<p>कई हफ्तों के बाद, मीना और मत्स्य प्रत्येक नेगाँव के तालाब मेंवापस अपना रास्ता
+खोजा, उसी दि न पहुँचे। उनका पनु र्मि लर्मि न परूेगाँव मेंखशु ी लाया। तालाब अधि क चमकदार प्रतीत होनेलगा,
+और गाँव की समद्ृधि और भी अधि क प्रचरुता के साथ लौट आई।</p>
+
+<p>ग्रामीणों नेमहससू कि या कि मछलि यों का सच्चा सौभाग्य केवल उनकी उपस्थि ति
+नहीं थी, बल्कि दयालतु ा और बद्ुधि थी जो उन्होंनेअपनी यात्रा के दौरान दसू रों के साथ साझा की थी। दोनों
+मछलि यों नेएक ऐसा नेटवर्क बनाया था जो उनके घर तक वापस बह गया था।</p>
+
+<div class="moral">एकता और दृढ़ता कि सी भी बाधा को दरू कर सकती हैऔर
+
+समद्ृधि ला सकती है।</div>
+</div>
+</div>
+<div class="audio-controls">
+<button class="audio-btn" data-story="fish" data-lang="en" data-play-text="🔊
+
+Listen in English" data-pause-text="⏸ Pause">
+
+🔊 Listen in English
+</button>
+<button class="audio-btn" data-story="fish" data-lang="hi" data-play-text="🔊
+
+हि दं ी मेंसनु ें" data-pause-text="⏸ रोकें">
+🔊 हि दं ी मेंसनु ें
+</button>
+</div>
+<div class="audio-message"></div>
+</div>
+</div>
+<!-- Kolam 5: The Turtle's Patience -->
+<div class="kolam-card">
+<div class="kolam-image" style="background-image:
+url('https://i.pinimg.com/1200x/05/7f/46/057f4626dd46a64ad8df24616964836d.jpg');">
+
+<div class="kolam-title">The Turtle's Patience</div>
+</div>
+<div class="kolam-content">
+<div class="language-selector">
+<button class="lang-btn active" data-lang="en"
+
+data-story="turtle">English</button>
+
+<button class="lang-btn" data-lang="hi" data-story="turtle">हि दं ी</button>
+</div>
+<div class="story-container">
+<div class="story active" id="turtle-en">
+<h3>The Turtle's Patience</h3>
+<p>In a peaceful meadow by a river lived Kachhua, an old turtle known for
+his wisdom and patience. The younger animals often teased him for his slow pace, but
+Kachhua never minded. He knew that rushing often led to mistakes.</p>
+
+<p>One day, a young rabbit named Shashi challenged Kachhua to a race.
+"I am the fastest animal in the meadow," boasted Shashi. "Surely even you can't deny that I
+would win any race!"</p>
+
+<p>Kachhua smiled gently. "Speed is not everything, young friend. But I
+
+accept your challenge."</p>
+
+<p>The race was set from the old banyan tree to the riverbank, a distance
+that would take Shashi mere minutes to cover. The other animals gathered to watch, certain
+of the rabbit's victory.</p>
+
+<p>As the race began, Shashi shot ahead like an arrow, quickly leaving
+Kachhua far behind. Confident of his win, Shashi decided to rest for a while. "I have plenty of
+time," he thought, and soon fell asleep under a shady tree.</p>
+
+<p>Meanwhile, Kachhua plodded steadily along, never stopping or looking
+back. Step by step, he moved forward, his eyes fixed on the finish line. When he passed the
+sleeping Shashi, he continued without disturbing the rabbit.</p>
+
+<p>Shashi awoke to the sound of cheers. He looked up to see Kachhua
+approaching the finish line! With a desperate leap, Shashi sprinted forward, but it was too
+late. Kachhua had already crossed the line, winning the race.</p>
+
+<p>The animals cheered for the wise turtle. Shashi bowed his head in
+shame. "I have learned my lesson," he said. "Patience and perseverance are more important
+than speed."</p>
+
+<p>Kachhua nodded. "Each of us has our own strengths. When we
+
+respect our own nature and work with it, we will find success."</p>
+
+<div class="moral">Slow and steady persistence often achieves more than
+
+speed and talent alone.</div>
+</div>
+<div class="story" id="turtle-hi">
+<h3>कछुए की धर्यै </h3>
+<p>नदी के कि नारेएक शांत मदै ान मेंकछुआ नामक एक बढ़ू ा कछुआ रहता था, जो
+अपनी बद्ुधि और धर्यै र्यके लि ए जाना जाता था। छोटेजानवर अक्सर उसकी धीमी गति के लि ए उसेचि ढ़ातेथे,
+लेकि न कछुआ कभी परेशान नहीं होता था। वह जानता था कि जल्दबाजी अक्सर गलति यों का कारण बनती
+है।</p>
+
+<p>एक दि न, शशी नामक एक यवु ा खरगोश नेकछुआ को दौड़ के लि ए चनु ौती दी। "मैं
+मदै ान का सबसेतजे जानवर हूं," शशी नेडींग मारी। "नि श्चि त रूप सेतमु भी इस बात सेइनकार नहींकर
+सकतेकि मैंकोई भी दौड़ जीतगंू ा!"</p>
+
+<p>कछुआ नेधीरेसेमस्ुकुराया। "गति सब कुछ नहीं है, यवु ा मि त्र। लेकि न मैंतम्ुहारी
+
+चनु ौती स्वीकार करता हूं।"</p>
+
+<p>दौड़ परुानेबरगद के पेड़ सेनदी के कि नारेतक नि र्धा रि त की गई थी, जो दरूी शशी को
+मि नटों मेंपरूी करनी थी। दसू रेजानवर खरगोश की जीत सेनि श्चि त होकर देखनेके लि ए इकट्ठेहुए।</p>
+<p>जसै ेही दौड़ शरूु हुई, शशी एक तीर की तरह आगेनि कल गया, जल्दी ही कछुआ को
+काफी पीछेछोड़ दि या। अपनी जीत पर वि श्वास करके, शशी नेकुछ समय के लि ए आराम करनेका फैसला
+कि या। "मेरेपास बहुत समय है," उसनेसोचा, और जल्द ही एक छायादार पेड़ के नीचेसो गया।</p>
+<p>इस बीच, कछुआ लगातार आगेबढ़ता रहा, कभी नहींरुका या पीछेनहींदेखा। कदम
+दर कदम, वह आगेबढ़ा, उसकी नजरेंफि नि श लाइन पर टि की हुई थीं। जब वह सोतेहुए शशी सेगजु रा, तो
+उसनेखरगोश को परेशान कि ए बि ना आगेबढ़ना जारी रखा।</p>
+
+<p>शशी तालि यों की आवाज सेजागा। उसनेऊपर देखा कि कछुआ फि नि श लाइन के
+पास पहुंच रहा है! एक नि राशाजनक छलांग के साथ, शशी आगेभागा, लेकि न बहुत देर हो चकु ी थी। कछुआ
+पहलेही लाइन पार कर चकु ा था, दौड़ जीत चकु ा था।</p>
+
+<p>जानवरों नेबद्ुधि मान कछुआ के लि ए तालि यांबजाईं। शशी नेशर्म सेसि र झकु ा
+दि या। "मनैं ेअपना सबक सीख लि या है," उसनेकहा। "धर्यै र्यऔर दृढ़ता गति सेअधि क महत्वपर्णू र्णहैं।"</p>
+<p>कछुआ नेसि र हि लाया। "हम मेंसेप्रत्येक की अपनी ताकतेंहैं। जब हम अपने
+
+स्वभाव का सम्मान करतेहैंऔर उसके साथ काम करतेहैं, तो हम सफलता पाएंगे।"</p>
+
+<div class="moral">धीमी और स्थि र दृढ़ता अक्सर केवल गति और प्रति भा सेअधि क
+
+प्राप्त करती है।</div>
+</div>
+</div>
+<div class="audio-controls">
+<button class="audio-btn" data-story="turtle" data-lang="en"
+data-play-text="🔊 Listen in English" data-pause-text="⏸ Pause">
+
+🔊 Listen in English
+</button>
+<button class="audio-btn" data-story="turtle" data-lang="hi"
+
+data-play-text="🔊 हि दं ी मेंसनु ें" data-pause-text="⏸ रोकें">
+
+🔊 हि दं ी मेंसनु ें
+</button>
+</div>
+<div class="audio-message"></div>
+</div>
+</div>
+<!-- Kolam 6: The Lion's Courage -->
+<div class="kolam-card">
+<div class="kolam-image" style="background-image:
+url('https://i.pinimg.com/1200x/63/53/eb/6353ebecabdc91d248974fbeed3b73ec.jpg');">
+
+<div class="kolam-title">The Lion's Courage</div>
+</div>
+<div class="kolam-content">
+<div class="language-selector">
+<button class="lang-btn active" data-lang="en"
+
+data-story="lion">English</button>
+
+<button class="lang-btn" data-lang="hi" data-story="lion">हि दं ी</button>
+</div>
+<div class="story-container">
+<div class="story active" id="lion-en">
+<h3>The Lion's Courage</h3>
+<p>In the vast savannah ruled a mighty lion named Sher. With his golden
+mane and powerful roar, he was respected by all animals. Sher ruled with wisdom, ensuring
+that the balance of nature was maintained and all creatures had enough to eat and
+drink.</p>
+
+<p>One day, a young tiger named Bagh arrived in the savannah. Strong
+and ambitious, Bagh believed that strength alone should determine leadership. "I challenge
+you, Sher," declared Bagh. "Let us fight for control of this land. The strongest should
+rule!"</p>
+
+<p>The animals gathered, fearing a battle that would disrupt their peaceful
+lives. But Sher surprised them all. "Strength is important, young Bagh," said Sher calmly.
+"But wisdom and compassion are equally vital for a true leader."</p>
+
+<p>Sher proposed a different challenge. "Instead of fighting, let us each
+find a way to bring water to the dried-up eastern plains during the coming drought. The one
+whose solution benefits the most creatures shall be deemed the wiser leader."</p>
+<p>Bagh agreed, confident in his strength. He spent days digging a
+massive trench from the river to the plains, but the water seeped into the dry earth before
+reaching its destination.</p>
+
+<p>Sher, meanwhile, consulted with the beavers and elephants. Together,
+they designed a system of small channels and reservoirs that would conserve water and
+distribute it gradually. When the drought came, Sher's system provided water to all
+creatures, while Bagh's trench remained dry.</p>
+
+<p>Bagh bowed his head in respect. "You have shown that true leadership
+requires more than strength. It requires wisdom, planning, and consideration for all."</p>
+<p>Sher placed a paw on Bagh's shoulder. "Your strength is impressive,
+young friend. Together, our combined qualities can make this land even better." And so, the
+lion and the tiger ruled together, bringing prosperity to the savannah.</p>
+
+<div class="moral">True leadership combines courage with wisdom and
+
+generosity.</div>
+</div>
+<div class="story" id="lion-hi">
+<h3>शरे का साहस</h3>
+<p>वि शाल सवाना मेंशरे नामक एक शक्ति शाली शरे शासन करता था। अपनेसनु हरे
+अभ्रक और शक्ति शाली गर्जनर्ज के साथ, वह सभी जानवरों द्वारा सम्मानि त था। शरे नेबद्ुधि के साथ शासन
+कि या, यह सनिुनिश्चि त करतेहुए कि प्रकृति का सतं लु न बना रहेऔर सभी जीवों के लि ए पर्या प्त भोजन और
+पेय हो।</p>
+
+<p>एक दि न, बाघ नामक एक यवु ा बाघ सवाना मेंआया। मजबतू और महत्वाकांक्षी,
+बाघ मानता था कि केवल शक्ति ही नेतत्ृव नि र्धा रि त करनी चाहि ए। "मैंतम्ुहेंचनु ौती देता हूं, शरे," बाघ ने
+घोषणा की। "इस भमिूमि पर नि यत्रं ण के लि ए आओ हम लड़ें। सबसेमजबतू को शासन करना चाहि ए!"</p>
+<p>जानवर इकट्ठेहुए, एक ऐसी लड़ाई सेडरतेहुए जो उनके शांति पर्णू र्णजीवन को
+बाधि त करेगी। लेकि न शरे नेसभी को आश्चर्यचर्य कि त कि या। "शक्ति महत्वपर्णू र्णहै, यवु ा बाघ," शरे नेशांति से
+कहा। "लेकि न एक सच्चेनेता के लि ए बद्ुधि और दया भी समान रूप सेमहत्वपर्णू र्णहैं।"</p>
+
+<p>शरे नेएक अलग चनु ौती का प्रस्ताव दि या। "लड़नेके बजाय, आओ प्रत्येक आनेवाले
+सखू ेके दौरान सखू ी पर्वीू र्वी मदै ानों मेंपानी लानेका एक तरीका खोजें। जि सका समाधान सबसेअधि क जीवों को
+लाभ पहुंचाएगा, उसेबद्ुधि मान नेता माना जाएगा।"</p>
+
+<p>बाघ सहमत हो गया, अपनी शक्ति पर वि श्वास करतेहुए। उसनेनदी सेमदै ानों तक
+एक वि शाल खाई खोदनेमेंदि न बि ताए, लेकि न पानी अपनेगतं व्य तक पहुंचनेसेपहलेसखू ी धरती मेंसोख
+गया।</p>
+
+<p>दसू री ओर, शरे नेबीवर और हाथि यों सेपरामर्श कि या। एक साथ, उन्होंनेछोटी नहरों
+और जलाशयों की एक प्रणाली डि जाइन की जो पानी को सरं क्षि त करेगी और धीरे-धीरेवि तरि त करेगी। जब
+सखू ा आया, तो शरे की प्रणाली नेसभी जीवों को पानी प्रदान कि या, जबकि बाघ की खाई सखू ी रही।</p>
+<p>बाघ नेसम्मान मेंसि र झकु ाया। "आपनेदि खाया हैकि सच्चेनेतत्ृव के लि ए केवल
+शक्ति की आवश्यकता नहीं होती। इसमेंबद्ुधि , योजना, और सभी के लि ए वि चार की आवश्यकता होती
+है।"</p>
+
+<p>शरे नेबाघ के कंधेपर एक पजं ा रखा। "तम्ुहारी शक्ति प्रभावशाली है, यवु ा मि त्र। एक
+साथ, हमारेसयं क्ुत गणु इस भमिूमि को और भी बेहतर बना सकतेहैं।" और इस तरह, शरे और बाघ नेएक साथ
+शासन कि या, सवाना मेंसमद्ृधि लाई।</p>
+
+<div class="moral">सच्चा नेतत्ृव साहस को बद्ुधि और उदारता के साथ जोड़ता
+
+है।</div>
+
+</div>
+
+</div>
+<div class="audio-controls">
+<button class="audio-btn" data-story="lion" data-lang="en" data-play-text="🔊
+
+Listen in English" data-pause-text="⏸ Pause">
+
+🔊 Listen in English
+</button>
+<button class="audio-btn" data-story="lion" data-lang="hi" data-play-text="🔊
+
+हि दं ी मेंसनु ें" data-pause-text="⏸ रोकें">
+🔊 हि दं ी मेंसनु ें
+</button>
+</div>
+<div class="audio-message"></div>
+</div>
+</div>
+<!-- Kolam 7: The Swan's Purity -->
+<div class="kolam-card">
+<div class="kolam-image" style="background-image:
+url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtUyHsQvyftKjRyyJOgJjUANtQM2sDheo6yw0jzuJfWXsigsKg');">
+
+<div class="kolam-title">The Swan's Purity</div>
+</div>
+<div class="kolam-content">
+<div class="language-selector">
+<button class="lang-btn active" data-lang="en"
+
+data-story="swan">English</button>
+
+<button class="lang-btn" data-lang="hi" data-story="swan">हि दं ी</button>
+</div>
+<div class="story-container">
+<div class="story active" id="swan-en">
+<h3>The Swan's Purity</h3>
+<p>On a serene lake surrounded by lotus flowers lived a swan named
+Hansa. Hansa was known far and wide for a special gift - the ability to separate milk from
+water. This unique skill symbolized the swan's capacity to discern good from evil, truth from
+falsehood.</p>
+
+<p>The nearby village was often troubled by disputes. When
+
+disagreements arose, the villagers would bring their problems to Hansa. The swan would
+listen carefully to both sides, then offer wisdom that helped resolve their conflicts.</p>
+<p>One day, two farmers came to Hansa with a dispute over a piece of
+land. Each claimed ownership, presenting documents that seemed authentic. The villagers
+were divided, unable to determine who was truthful.</p>
+
+<p>Hansa requested a bowl of milk mixed with water. As the villagers
+watched, Hansa dipped her beak into the mixture and drank, leaving only pure milk behind.
+"Just as I can separate milk from water," said Hansa, "so too can we separate truth from
+falsehood in this matter."</p>
+
+<p>The swan then asked each farmer to recount how they had come to
+own the land. She listened intently, noticing subtle inconsistencies in one farmer's story. With
+gentle questioning, she guided the villagers to discover the truth - that one farmer had forged
+his documents.</p>
+
+<p>The villagers were amazed. "How did you know?" they asked.</p>
+<p>Hansa replied, "The truth, like milk, has a purity that cannot be hidden
+
+when mixed with falsehood. One must only learn to see clearly."</p>
+
+<p>From that day, the villagers sought not only Hansa's help in disputes
+but also her guidance in developing their own discernment. The swan taught them to look
+beyond appearances, to listen carefully, and to trust their wisdom.</p>
+
+<div class="moral">True wisdom comes from the ability to discern right
+
+from wrong and act accordingly.</div>
+
+</div>
+<div class="story" id="swan-hi">
+<h3>हंस की शद्ुधता</h3>
+<p>कमल के फूलों सेघि रेएक शांत झील पर हंसा नामक एक हंस रहता था। हंसा एक
+वि शषे उपहार के लि ए दरू-दरू तक जाना जाता था - दधू और पानी को अलग करनेकी क्षमता। यह अनठू ा
+कौशल हंस की बरुाई सेअच्छाई, झठू सेसच्चाई को भेद करनेकी क्षमता का प्रतीक था।</p>
+<p>नि कटवर्ती गाँव अक्सर वि वादों सेपरेशान रहता था। जब भी मतभेद पदै ा होत,े
+ग्रामीण अपनी समस्याएं हंसा के पास लातेथे। हंस दोनों पक्षों को ध्यान सेसनु ता था, फि र उन वि वादों को हल
+करनेमेंमदद करनेवाली बद्ुधि प्रदान करता था।</p>
+
+<p>एक दि न, दो कि सान जमीन के एक टुकड़ेपर वि वाद लेकर हंसा के पास आए। प्रत्येक
+नेस्वामि त्व का दावा कि या, प्रामाणि क लगनेवालेदस्तावेज प्रस्ततु कि ए। ग्रामीण वि भाजि त थे, यह नि र्धा रि त
+करनेमेंअसमर्थ कि कौन सच्चा था।</p>
+
+<p>हंसा नेपानी मेंमि ला हुआ दधू का एक कटोरा मांगा। जसै ेही ग्रामीण देख रहेथे, हंसा
+नेअपनी चोंच मि श्रण मेंडाली और पी गई, केवल शद्ुध दधू को पीछेछोड़ दि या। "जसै ेमैंदधू को पानी से
+अलग कर सकता हूं," हंसा नेकहा, "उसी तरह हम इस मामलेमेंझठू सेसच्चाई को भी अलग कर सकते
+हैं।"</p>
+
+<p>फि र हंस नेप्रत्येक कि सान सेयह बतानेको कहा कि वेजमीन के मालि क कैसेबने।
+उसनेध्यान सेसनु ा, एक कि सान की कहानी मेंसक्ष्ू म असगं ति यों पर ध्यान दि या। कोमल प्रश्नों के साथ,
+उसनेग्रामीणों को सच्चाई की खोज का मार्गदर्ग र्शनर्श कि या - कि एक कि सान नेअपनेदस्तावेजों को जाली
+बनाया था।</p>
+
+<p>ग्रामीण आश्चर्यचर्य कि त थे। "आपको कैसेपता?" उन्होंनेपछू ा।</p>
+<p>हंसा नेजवाब दि या, "सच्चाई, दधू की तरह, एक शद्ुधता हैजो झठू के साथ मि लने
+
+पर छि पी नहीं रह सकती। कि सी को केवल स्पष्ट रूप सेदेखना सीखना होगा।"</p>
+
+<p>उस दि न से, ग्रामीणों नेकेवल वि वादों मेंहंसा की मदद ही नहींमांगी, बल्कि अपने
+स्वयंके वि वेक को वि कसि त करनेमेंभी उसका मार्गदर्ग र्शनर्श मांगा। हंस नेउन्हेंदि खावेसेपरेदेखना, ध्यान से
+सनु ना, और अपनी बद्ुधि पर भरोसा करना सि खाया।</p>
+
+<div class="moral">सच्ची बद्ुधि सही और गलत मेंभेद करनेऔर उसके अनसु ार
+
+कार्य करनेकी क्षमता सेआती है।</div>
+
+</div>
+</div>
+<div class="audio-controls">
+<button class="audio-btn" data-story="swan" data-lang="en"
+data-play-text="🔊 Listen in English" data-pause-text="⏸ Pause">
+
+🔊 Listen in English
+</button>
+<button class="audio-btn" data-story="swan" data-lang="hi"
+
+data-play-text="🔊 हि दं ी मेंसनु ें" data-pause-text="⏸ रोकें">
+
+🔊 हि दं ी मेंसनु ें
+</button>
+</div>
+
+<div class="audio-message"></div>
+</div>
+</div>
+<!-- Kolam 8: The Tree of Life -->
+<div class="kolam-card">
+<div class="kolam-image" style="background-image:
+url('https://i.pinimg.com/736x/c3/01/c4/c301c469c797f0d073b9a322f1dd3e6c.jpg');">
+
+<div class="kolam-title">The Tree of Life</div>
+</div>
+<div class="kolam-content">
+<div class="language-selector">
+<button class="lang-btn active" data-lang="en"
+
+data-story="tree">English</button>
+
+<button class="lang-btn" data-lang="hi" data-story="tree">हि दं ी</button>
+</div>
+<div class="story-container">
+<div class="story active" id="tree-en">
+<h3>The Tree of Life</h3>
+<p>In the center of a small village stood an ancient banyan tree named
+Vriksha. With its massive trunk and sprawling branches that created a canopy over the entire
+village square, Vriksha was more than just a tree - it was the heart of the community.</p>
+<p>Children played among its roots, elders shared stories in its shade, and
+birds nested in its branches. The tree provided not only shelter but also wisdom to those who
+listened.</p>
+
+<p>One year, a terrible storm swept through the region. Winds howled,
+rain poured, and lightning split the sky. The villagers huddled in their homes, fearing for their
+lives. As the storm intensified, a family found their house collapsing around them.</p>
+<p>With no time to reach the village shelter, they ran to Vriksha. The great
+tree seemed to sense their need, lowering its branches to create a protective alcove. The
+family huddled together under Vriksha's canopy as the storm raged around them.</p>
+<p>When morning came, the villagers emerged to find devastation. Many
+homes were damaged, but the family under Vriksha was safe. The tree had weathered the
+storm, though some of its branches were broken.</p>
+
+<p>The village gathered around Vriksha, grateful for its protection. The
+elder spoke: "This tree teaches us the importance of strong roots and spreading branches.
+Our roots are our family values and traditions, which keep us grounded. Our branches are
+our acts of kindness to others, which provide shelter and support."</p>
+
+<p>In the months that followed, the villagers worked together to rebuild
+their homes, just as Vriksha began to heal and grow new branches. The tree and the village
+became symbols of resilience and community strength.</p>
+
+<div class="moral">Strong family roots and helping others create a stable,
+
+nurturing community.</div>
+</div>
+<div class="story" id="tree-hi">
+<h3>जीवन का वक्षृ </h3>
+
+<p>एक छोटेगाँव के केंद्र मेंवक्षृ नामक एक प्राचीन बरगद का पेड़ खड़ा था। अपने
+वि शाल तन और फैली हुई शाखाओंके साथ जो परूेगाँव के चौक पर एक छत बनाती थी, वक्षृ केवल एक पेड़ से
+अधि क था - यह समदुाय का दि ल था।</p>
+
+<p>बच्चेइसकी जड़ों के बीच खेलतेथे, बजु र्गु र्गइसकी छाया मेंकहानि याँसाझा करतेथे,
+और पक्षी इसकी शाखाओंमेंघोंसलेबनातेथे। पेड़ न केवल शरण प्रदान करता था, बल्कि उन लोगों को बद्ुधि
+भी प्रदान करता था जो सनु तेथे।</p>
+
+<p>एक साल, एक भयानक तफू ान क्षेत्र सेगजु रा। हवाएंगरजनेलगीं, बारि श हुई, और
+बि जली आसमान को फाड़ रही थी। ग्रामीण अपनेघरों मेंइकट्ठेहो गए, अपनी जान सेडर रहेथे। जसै े-जसै े
+तफू ान तीव्र हुआ, एक परि वार को अपना घर ढहता हुआ महससू हुआ।</p>
+
+<p>गाँव के शरण स्थल तक पहुँचनेका समय न होनेपर, वेवक्षृ के पास भागे। महान
+पेड़ नेउनकी जरूरत को महससू कि या प्रतीत हुआ, एक सरुक्षात्मक खोह बनानेके लि ए अपनी शाखाओंको
+नीचेकि या। परि वार वक्षृ की छत के नीचेएक साथ इकट्ठा हो गया जब तफू ान उनके आसपास राज कर रहा
+था।</p>
+
+<p>जब सबु ह हुई, तो ग्रामीण तबाही देखनेके लि ए नि कले। कई घर क्षति ग्रस्त हो गए,
+लेकि न वक्षृ के नीचेका परि वार सरुक्षि त था। पेड़ नेतफू ान का सामना कि या, हालांकि इसकी कुछ शाखाएं टूट
+गई थीं।</p>
+
+<p>गाँव वक्षृ के चारों ओर इकट्ठा हुआ, इसकी सरुक्षा के लि ए आभारी। बजु र्गु र्गनेकहा:
+"यह पेड़ हमेंमजबतू जड़ों और फैली हुई शाखाओंके महत्व को सि खाता है। हमारी जड़ेंहमारेपारि वारि क मल्ूय
+और परंपराएं हैं, जो हमेंजमीन सेजोड़ेरखतेहैं। हमारी शाखाएं दसू रों के प्रति हमारी दयालतु ा के कार्य हैं, जो
+शरण और समर्थनर्थ प्रदान करतेहैं।"</p>
+
+<p>अगलेमहीनों में, ग्रामीणों नेएक साथ अपनेघरों का पनु र्नि र्मार्नि र्माण कि या, जसै ेवक्षृ
+ठीक होनेऔर नई शाखाएं उगानेलगा। पेड़ और गाँव लचीलेपन और सामदुायि क शक्ति के प्रतीक बन
+गए।</p>
+
+<div class="moral">मजबतू पारि वारि क जड़ेंऔर दसू रों की मदद करनेसेएक स्थि र,
+
+पोषक समदुाय बनता है।</div>
+</div>
+</div>
+<div class="audio-controls">
+<button class="audio-btn" data-story="tree" data-lang="en"
+data-play-text="🔊 Listen in English" data-pause-text="⏸ Pause">
+
+🔊 Listen in English
+</button>
+<button class="audio-btn" data-story="tree" data-lang="hi" data-play-text="🔊
+
+हि दं ी मेंसनु ें" data-pause-text="⏸ रोकें">
+🔊 हि दं ी मेंसनु ें
+</button>
+</div>
+<div class="audio-message"></div>
+</div>
+</div>
+<!-- Kolam 9: The Sun's Energy -->
+<div class="kolam-card">
+<div class="kolam-image" style="background-image:
+url('https://i.pinimg.com/1200x/e2/30/82/e23082ea38be4a1fc77dd7b6fc67ca04.jpg');">
+
+<div class="kolam-title">The Sun's Energy</div>
+</div>
+<div class="kolam-content">
+
+<div class="language-selector">
+<button class="lang-btn active" data-lang="en"
+
+data-story="sun">English</button>
+
+<button class="lang-btn" data-lang="hi" data-story="sun">हि दं ी</button>
+</div>
+<div class="story-container">
+<div class="story active" id="sun-en">
+<h3>The Sun's Energy</h3>
+<p>High in the heavens, the sun god Surya traveled across the sky each
+day, bringing light and warmth to the world. Surya was proud of his power, believing that his
+energy alone sustained all life on Earth.</p>
+
+<p>Each morning, Surya would rise with great fanfare, his rays spreading
+across the land. Plants would turn toward him, animals would emerge from their shelters,
+and humans would begin their day. "All life depends on me," Surya would boast to the moon
+and stars who watched from above.</p>
+
+<p>One day, the Earth began to wither. Despite Surya's powerful rays, the
+plants drooped, rivers dried up, and the air grew heavy. Confused, Surya increased his
+intensity, but this only made matters worse.</p>
+
+<p>The moon goddess Chandra approached Surya. "Brother," she said
+gently, "your energy is vital, but it is not meant to work alone. The world needs balance - light
+and dark, heat and cool, activity and rest."</p>
+
+<p>Surya was skeptical but agreed to observe. He noticed how the moon's
+gentle light guided nocturnal creatures, how the stars inspired wonder and navigation, and
+how the cool night allowed the Earth to rejuvenate.</p>
+
+<p>"I see now," Surya realized. "My power is greatest when shared with
+
+others. Together, we create a perfect balance that sustains all life."</p>
+
+<p>From that day forward, Surya no longer tried to dominate the sky.
+Instead, he worked in harmony with the moon and stars, each contributing their unique
+energy to the world. The Earth flourished once more, with vibrant days and peaceful
+nights.</p>
+
+<p>The humans below noticed the change and began to honor not just the
+sun, but the moon and stars as well, recognizing that true power comes from balance and
+cooperation.</p>
+
+<div class="moral">True power comes from sharing energy and knowledge
+
+with others, not hoarding it.</div>
+
+</div>
+<div class="story" id="sun-hi">
+<h3>सर्यू र्यकी ऊर्जा </h3>
+<p>आकाश मेंऊं चाई पर, सर्यू र्यदेवता सर्यू र्यप्रति दि न आकाश मेंयात्रा करतेथे, दनिुनिया को
+प्रकाश और ऊष्मा लातेथे। सर्यू र्यको अपनी शक्ति पर गर्व था, यह मानतेहुए कि केवल उनकी ऊर्जा ही पथ्ृवी
+पर सभी जीवन को बनाए रखती है।</p>
+
+<p>हर सबु ह, सर्यू र्यबड़ेधमू धाम सेउदय होतेथे, उनकी कि रणेंभमिूमि पर फैलती थीं। पौधे
+उनकी ओर मड़ु जातेथे, जानवर अपनेआश्रय सेबाहर नि कलतेथे, और मनष्ुय अपना दि न शरूु करतेथे।
+"सभी जीवन मझु पर नि र्भरर्भ है," सर्यू र्यऊपर सेदेख रहेचद्रं मा और तारों सेकहतेथे।</p>
+
+<p>एक दि न, पथ्ृवी मरुझानेलगी। सर्यू र्यकी शक्ति शाली कि रणों के बावजदू , पौधेमरुझा
+गए, नदि यांसखू गईं, और हवा भारी हो गई। भ्रमि त होकर, सर्यू र्यनेअपनी तीव्रता बढ़ा दी, लेकि न इससेस्थि ति
+और खराब हो गई।</p>
+
+<p>चद्रं देवी चद्रं मा सर्यू र्यके पास आईं। "भाई," उन्होंनेधीरेसेकहा, "आपकी ऊर्जा
+महत्वपर्णू र्णहै, लेकि न इसेअकेलेकाम करनेके लि ए नहींबनाया गया है। दनिुनिया को सतं लु न की आवश्यकता है
+- प्रकाश और अधं ेरा, गर्मी और ठंडक, गति वि धि और आराम।"</p>
+
+<p>सर्यू र्यनेसदं ेह कि या लेकि न देखनेपर सहमत हुए। उन्होंनेदेखा कि कैसेचद्रं मा की
+कोमल रोशनी नि शाचर जीवों का मार्गदर्ग र्शनर्श करती है, कैसेतारेआश्चर्य और नेवि गेशन को प्रेरि त करतेहैं, और
+कैसेशांत रात पथ्ृवी को तरोताजा होनेकी अनमु ति देती है।</p>
+
+<p>"अब मैंसमझ गया," सर्यू र्यनेमहससू कि या। "मेरी शक्ति सबसेबड़ी होती हैजब
+दसू रों के साथ साझा की जाती है। एक साथ, हम एक उत्तम सतं लु न बनातेहैंजो सभी जीवन को बनाए रखता
+है।"</p>
+
+<p>उस दि न से, सर्यू र्यनेअब आकाश पर हावी होनेकी कोशि श नहींकी। इसके बजाय, वे
+चद्रं मा और तारों के साथ सामजं स्य मेंकाम करतेथे, प्रत्येक दनिुनिया को अपनी अनठू ी ऊर्जा देता था। पथ्ृवी
+एक बार फि र खि ली-खि ली, जीवतं दि नों और शांत रातों के साथ।</p>
+
+<p>नीचेके मनष्ुयों नेबदलाव नोटि स कि या और केवल सर्यू र्यही नहीं, बल्कि चद्रं मा और
+तारों का भी सम्मान करनेलगे, यह महससू करतेहुए कि सच्ची शक्ति सतं लु न और सहयोग सेआती है।</p>
+<div class="moral">सच्ची शक्ति ऊर्जा और ज्ञान को दसू रों के साथ साझा करनेसे
+
+आती है, इसेजमा करनेसेनहीं।</div>
+
+</div>
+</div>
+<div class="audio-controls">
+<button class="audio-btn" data-story="sun" data-lang="en"
+data-play-text="🔊 Listen in English" data-pause-text="⏸ Pause">
+
+🔊 Listen in English
+</button>
+<button class="audio-btn" data-story="sun" data-lang="hi" data-play-text="🔊
+
+हि दं ी मेंसनु ें" data-pause-text="⏸ रोकें">
+🔊 हि दं ी मेंसनु ें
+</button>
+</div>
+<div class="audio-message"></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+<footer>
+<p>© 2023 Kolam Stories - Traditional Wisdom in Art. All rights reserved.</p>
+</footer>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+// Load voices for Hindi support
+function loadVoices() {
+const voices = window.speechSynthesis.getVoices();
+// We don't need to do anything here, but we want to make sure voices are loaded
+}
+loadVoices();
+if (window.speechSynthesis.onvoiceschanged !== undefined) {
+window.speechSynthesis.onvoiceschanged = loadVoices;
+}
+// Language selection functionality
+const langButtons = document.querySelectorAll('.lang-btn');
+langButtons.forEach(button => {
+button.addEventListener('click', function() {
+const storyId = this.getAttribute('data-story');
+const lang = this.getAttribute('data-lang');
+// Update active language button
+const parent = this.parentElement;
+parent.querySelectorAll('.lang-btn').forEach(btn => {
+
+btn.classList.remove('active');
+});
+this.classList.add('active');
+// Show selected language story
+const storyContainer =
+
+this.closest('.kolam-content').querySelector('.story-container');
+storyContainer.querySelectorAll('.story').forEach(story => {
+story.classList.remove('active');
+});
+document.getElementById(`${storyId}-${lang}`).classList.add('active');
+});
+});
+// Audio functionality with pause support
+const audioButtons = document.querySelectorAll('.audio-btn');
+let currentAudio = null;
+let isPaused = false;
+audioButtons.forEach(button => {
+button.addEventListener('click', function() {
+const storyId = this.getAttribute('data-story');
+const lang = this.getAttribute('data-lang');
+const playText = this.getAttribute('data-play-text');
+const pauseText = this.getAttribute('data-pause-text');
+const storyElement = document.getElementById(`${storyId}-${lang}`);
+const storyText = storyElement.innerText;
+const messageElement =
+
+this.closest('.kolam-content').querySelector('.audio-message');
+
+// Clear any previous messages
+messageElement.textContent = '';
+// If there's an audio playing and it's not this button, stop it
+if (currentAudio && currentAudio.button !== this) {
+window.speechSynthesis.cancel();
+currentAudio.button.innerHTML =
+currentAudio.button.getAttribute('data-play-text');
+
+currentAudio.button.classList.remove('playing', 'paused');
+currentAudio = null;
+isPaused = false;
+}
+// If this button's audio is playing, pause it
+if (currentAudio && currentAudio.button === this && !isPaused) {
+window.speechSynthesis.pause();
+this.innerHTML = '▶ Resume';
+this.classList.remove('playing');
+
+this.classList.add('paused');
+isPaused = true;
+return;
+}
+// If this button's audio is paused, resume it
+if (currentAudio && currentAudio.button === this && isPaused) {
+window.speechSynthesis.resume();
+this.innerHTML = pauseText;
+this.classList.remove('paused');
+this.classList.add('playing');
+isPaused = false;
+return;
+}
+// Stop any currently playing audio
+if (currentAudio) {
+window.speechSynthesis.cancel();
+currentAudio.button.innerHTML =
+currentAudio.button.getAttribute('data-play-text');
+
+currentAudio.button.classList.remove('playing', 'paused');
+}
+// Create a new speech synthesis utterance
+const utterance = new SpeechSynthesisUtterance(storyText);
+utterance.lang = lang === 'en' ? 'en-US' : 'hi-IN';
+utterance.rate = 0.9;
+// Try to find a Hindi voice if available
+if (lang === 'hi') {
+const voices = window.speechSynthesis.getVoices();
+// Try multiple ways to find a Hindi voice
+let hindiVoice = voices.find(voice => voice.lang.startsWith('hi'));
+if (!hindiVoice) {
+hindiVoice = voices.find(voice => voice.lang.includes('IN'));
+}
+if (!hindiVoice) {
+hindiVoice = voices.find(voice =>
+voice.name.toLowerCase().includes('hindi'));
+
+}
+if (hindiVoice) {
+utterance.voice = hindiVoice;
+} else {
+// Show error message if no Hindi voice is found
+
+messageElement.textContent = 'Hindi voice not available. Please try a different browser or install Hindi language pack.';
+this.classList.add('error');
+setTimeout(() => {
+messageElement.textContent = '';
+this.classList.remove('error');
+}, 5000);
+return;
+}
+}
+// Set up event handlers
+utterance.onend = function() {
+button.innerHTML = playText;
+button.classList.remove('playing', 'paused');
+currentAudio = null;
+isPaused = false;
+};
+utterance.onerror = function() {
+button.innerHTML = playText;
+button.classList.remove('playing', 'paused');
+currentAudio = null;
+isPaused = false;
+if (lang === 'hi') {
+messageElement.textContent = 'Error playing Hindi audio. Please try again later.';
+
+setTimeout(() => {
+messageElement.textContent = '';
+}, 5000);
+}
+};
+// Start speaking
+window.speechSynthesis.speak(utterance);
+// Update button state
+button.innerHTML = pauseText;
+button.classList.add('playing');
+currentAudio = {
+utterance: utterance,
+button: button
+};
+isPaused = false;
+});
+});
+});
+
+</script>
+</body>
+</html>
