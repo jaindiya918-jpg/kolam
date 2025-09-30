@@ -6,6 +6,18 @@ import os
 from pathlib import Path
 import firebase_admin
 from firebase_admin import credentials
+from decouple import config
+
+API_KEY = config("AIzaSyBvp2E8q221qU6qgTKBVD-ak68OOQ1yyTs")
+FIREBASE_KEY = config("-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCZ2KIXKSxgDybv\n2+HWsuLlVerO6bCtZ2RYcR0v/3AJJR1bPqfJ12e/UNUWUtUEfzO66YX8v+h0NoKS\naZgU8rGJheXuGDARJ7URNZ9gdRvlbzmXRFSZ40N7aLld+25a0G7BY3z6B8TysLlN\n87ocQoZyAXNQ/fGk/nfJunhUaApu4J0mQwFXUsZp/KZLpiv5YzXqtEBnA2DSHnG9\n6XZmEUMkLTWOiugcAiQBV5TD8V2uyLNmYrOwGStJZ7MQCp734VAPGvpbe1Pv/TwP\nv7BcZ79fuxoT9N8EMCRXwIHqOgEDyIdMWGdZ9FGHiE4GZkOxEdoyr0ydbH+Paahz\nnf2+yeojAgMBAAECggEAQObWjp3EhiuuOe8RaZEiziv+OFb2vViKSRNDBG4m1fzN\n0yHuB+Ty9A9GLbo4+kItURNV/of5KRmb4OdiDKhLxF/z3Ytfr8UICmAMQdV1tMdE\nzO87H4Zz//pwhNjet7oJl1UAsrwXVmi+a8e/wk9AR5UcEFVpHTlq0HP1cmpHyHka\npieLVTRfon1QZnP4+2YdKbx9M3knoCBdmBPN4RWBWbTHx9T/si+Q23AMr3cLhIKJ\np+Qh8S7UK+o+u+7/BUyt0PVa3ceGRoZj4L7RaT+Xij12Y2MYxo2+hoG2fwf5P3LO\n2F0En1XmGbbEMjMPFmlQ/J20k1PsOvG9CDanYg8FpQKBgQDSitvuSMsPX0lSC+9c\ndHkVCHt7CoXsWPbBlgNxD9bqmhXAdi25gGTtYNEWHcWfdm8yBWRYBjh/0jw6I8RL\n7uHJtLTInVvFEa15YaI5RxK3dZ00nQqXpLFi7qe695s7HrWP2anyv3Qw1jgdnxhm\nId4e48YUzKuptnIU7rJF9iHlFQKBgQC7EA0VCmTWE3cL71a9c1uY90fqUhVzwfd0\nJpIbkdrlSj32fW/zXnUyyMukmnXPMl9FwOLb7nbdGTEpMDkOV2L4UR6ia10QNU/F\nR+FEp+d63zH89QKaEB0n4d2DHGT2vl+xLmT7aII3X1+IZDynd1F6gIyMRAdMjfrb\n4v/cY5TQVwKBgEFZpIZDxfORifqThcpWxLaImXtJeuQvgPf5jjvrxLOw/AtvIyYu\n+iTMJloNB6hFZKJMFidUVvkl0lfhfi5riV3IX0zduvxiTkwcx/OrYd3b/d202PLU\nxdKFbT6VWHNzRrvNvfiBAJmgBG79UN9yp7VC0drm5GmbHbHtnRwmF8M5AoGBALCk\n/KWU1hnt8aocjh2C1MmDIa8dalKQpRtS3QAZ4MpLLG4aj+ASn7ugL+W1UnChkaQt\n/ExRSH+LLYhGmGp5jOUOvU4E8rG+liCmuwv5Pjcik3La72UKuG2T9Xi9FH6I0ZZg\nSE28p9KgRndmqHw/yXpT7+T4zKe3H2ALYS/9/WYrAoGBALOo9N2vc+Ucn7wLD2DH\nkyPUU0Zs362bNajG5Q7E9mDFyoiAftjuUbwrsuG3T+b67tQpwsnQray2rwMr5MhK\nl31hl2qwJ/PNYxUanjjFaC1edMjiW7nqXaJRDWX4B5jCnXkZTjyryfSM9XpuHkJo\n1m5CyhCWD1/9IZ/K9OcXUFKQ\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-fbsvc@kolam-b82f4.iam.gserviceaccount.com",
+  "client_id": "108734047769851372195",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-fbsvc%40kolam-b82f4.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com")
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
